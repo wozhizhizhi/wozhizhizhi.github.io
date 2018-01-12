@@ -284,7 +284,7 @@
 <li>太极拳中华之武术，强身健体，我自小也很爱武术，但是本人确是武术之菜鸟，网上在次看到太极图，- - 刚刚看到了一张太极的觉得很有意思,于是想用程序实现下</li>
 </ul>
 <ol>
-<li><p>废话不多说，很简单先上代码，哦不是是先上图片<img src="http://upload-images.jianshu.io/upload_images/5631872-79d9ab259618f31b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="device-2018-01-10-121939.png"></p>
+<li><p>废话不多说，很简单先上代码，哦不是是先上图片<br><img src="http://upload-images.jianshu.io/upload_images/5631872-79d9ab259618f31b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="device-2018-01-10-121939.png"></p>
 </li>
 <li><p>做之前先不忙写代码，要分析，太极图案实际上是一个圆分为黑白两块,然后边缘又是两圆,两个小点又是两圆，这样一分析代码就好写了，首先我需要准备两支画笔一黑一白</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 设置画布的中心点到中心</div><div class="line"> canvas.translate(width/2 , height/2);</div><div class="line"> // 设置画布的颜色</div><div class="line"> canvas.drawColor(Color.DKGRAY);</div><div class="line"> canvas.rotate(drgger);</div><div class="line"></div><div class="line"> int radius = Math.min(width , height)/2 - 200;</div><div class="line"> // 开始画2个半圆</div><div class="line"> RectF rectF = new RectF(-radius, -radius, radius, radius);</div><div class="line"> canvas.drawArc(rectF , -90 , 180 , true , baiPanit);</div><div class="line"> canvas.drawArc(rectF , 90 , 180 , true , heiPanit);</div></pre></td></tr></table></figure>
