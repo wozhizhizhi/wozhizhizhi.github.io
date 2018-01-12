@@ -155,6 +155,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-设计模式之单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/12/设计模式之单例模式/">设计模式之单例模式</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/12/设计模式之单例模式/" class="archive-article-date">
+  	<time datetime="2018-01-12T12:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2><ul>
+<li>单例模式（Singleton），简单来说，就是被单例的对象只能有一个实例存在。</li>
+<li>单例模式的实现方式<br>一个类能返回对象的一个引用（同一个）和一个获得该唯一实例的方法（静态方法）通过单例模式，我们可以保证系统中只有一个实例，从而达到节约或者控制系统资源的目的</li>
+<li>举个例子<br>1.在现实生活中跟你结婚的女人肯定只有一个,不然你就等着死翘翘了，重婚罪可不小–！</li>
+<li>实现单例的几种模式</li>
+</ul>
+<ol>
+<li>饿汉模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	// singleton</div><div class="line">	public MyWife() &#123;&#125;</div><div class="line">	private static final MyWife myWife = new MyWife();</div><div class="line">	public static MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>饿汉就是不管有没有调用过获得实例的方法，每次都会新建一个实例。</li>
+</ul>
+<ol>
+<li>懒汉模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static MyWife myWife;</div><div class="line">	public MyWife ()&#123;&#125;;</div><div class="line">	private static MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		if (myWife== null)</div><div class="line">		&#123;</div><div class="line">			myWife= new MyWife ();</div><div class="line">		&#125;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>懒汉模式 缺点，如果是多个线程调用就会创建多个单例</li>
+</ul>
+<ol>
+<li><p>懒汉模式线程安全，简单点的直接加同步关键字synchronized</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static MyWife myWife;</div><div class="line">	public MyWife ()&#123;&#125;;</div><div class="line">	private static synchronized MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		if (wife == null)</div><div class="line">		&#123;</div><div class="line">			myWife= new MyWife ();</div><div class="line">		&#125;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>双重检验锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class MyWife </div><div class="line">&#123;</div><div class="line"> private volatile static MyWife myWife;</div><div class="line"></div><div class="line"> private MyWife()&#123; &#125;</div><div class="line"></div><div class="line"> public static MyWife getWife()</div><div class="line"> &#123;</div><div class="line">     if (myWife == null) </div><div class="line">     &#123;</div><div class="line">         synchronized(MyWife.class)</div><div class="line">         &#123;</div><div class="line">             if (myWife == null) </div><div class="line">             &#123;</div><div class="line">            	 myWife = new MyWife();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">     return myWife;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>对于双重检验锁并不是太推荐使用，因为volatile 关键字作用是防止编译器自行优化代码 但是volatile 关键字在某些老版本的 JDK 中无法正常工作</li>
+</ul>
+<p>5 静态内部类的单例模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static class WifeHodler</div><div class="line">	&#123;</div><div class="line">		private static final MyWife myWife = new MyWife();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static MyWife getMyWife()</div><div class="line">	&#123;</div><div class="line">		return WifeHodler.myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>这种方式是推荐使用的，首先 WifeHolder 类是私有的，除了 getMyWife() 之外没有其它方式可以访问实例对象，而且只有在调用 getWife() 时才会去真正创建实例对象</li>
+</ul>
+<ol>
+<li>枚举的单例模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public enum MyWife</div><div class="line">&#123;</div><div class="line">	INSTANCE;</div><div class="line">	// 自定义任意的方法</div><div class="line">	public void whateverMethod()</div><div class="line">	&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>这种方式使用较好，但是逼格比较高 , 有兴趣可以试试<br><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></li>
+</ul>
+<p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/12/设计模式之单例模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-瞎玩android之太极" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
