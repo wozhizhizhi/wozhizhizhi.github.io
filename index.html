@@ -155,6 +155,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-View的事件分发机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/01/View的事件分发机制/">View的事件分发机制</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/01/View的事件分发机制/" class="archive-article-date">
+  	<time datetime="2018-03-01T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="View的事件分发机制"><a href="#View的事件分发机制" class="headerlink" title="View的事件分发机制"></a>View的事件分发机制</h2><ul>
+<li>网上讲view的事件分发机制的很多，但是大多都讲解的很混乱，我想整一篇大家都能看的懂得，下面我们以通俗易懂的方式来说说事件的分发机制</li>
+<li>首先我写了一段伪代码来理一理事件分发的3个重要方法的关系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public boolean dispatchTouchEvent(MotionEvent ev)</div><div class="line">   &#123;</div><div class="line">       boolean result = false;</div><div class="line">       if (onInterceptTouchEvent(ev))</div><div class="line">       &#123;</div><div class="line">           result = super.onTouchEvent(ev);</div><div class="line">       &#125;</div><div class="line">       else</div><div class="line">       &#123;</div><div class="line">           result = child.dispathTouchEvent(ev);</div><div class="line">       &#125;</div><div class="line">       return result;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>我们先来说说事件由上而下的传递规则,当点击事件产生后会最先有Activity来处理,传递给PhoneWindow,传递给DecorView,最后传递给ViewGroup也就是你setContentView的布局,一般在事件传递中只考虑ViewGroup的onInterceptTouchEvent的方法，而我们一般情况下也不会去重写dispathTouchEvent()方法</p>
+</li>
+<li><p>对于根ViewGroup,点击事件会先传递给它的onInterceptTouchEvent（）方法,如果该ViewGroup的onInterceptTouchEvent（）方法返回为true,这表示它会拦截这个事件，返回为false则表示不会去拦截这个事件，则这个事件会交给它的子元素的dispathTouchEvent()来处理，这样反复下去，如果传递到底层的view,就会调用view的dispathTouchEvent()方法，最终会调用View的onTouchEvent（）方法</p>
+</li>
+</ol>
+<p>-. 所以点击事件由上而下的传递规则是：为true,则拦截，不继续向下传递；为false则不拦截，继续向下传递</p>
+<p>-. 接下来我们来说说事件由下而上的传递,当点击事件传给底层的view时，如果其onTouchEvent（）返回为ture,则事件由底层的view消耗并处理了；如果返回为false则表示该view不做处理,传递给父view的onTouchEvent（）处理 ; 如果父view的onTouchEvent（）任然返回false,则继续传递给该父view的父view处理，如此反复下去。</p>
+<p>最后举个武侠例子吧，武林盟主的小弟发现敌人武功高强，打不过（onTouchEvent（）返回为false）,于是就去报告二当家，二当家的发现敌人太厉害，自己也打不过了（onTouchEvent（）返回为false）就去告诉武林盟主，武林盟主用无极剑法很轻松的打败了来犯的敌人（onTouchEvent（）返回为true）。</p>
+<p>-. 所以点击事件由下而上的传递规则是：为true,则是处理了，不继续向上传递；为false则不处理，继续向上传递</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></p>
+<p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/01/View的事件分发机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-一款简单易用的天气app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
