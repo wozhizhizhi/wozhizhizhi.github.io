@@ -155,6 +155,129 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeakCanary内存泄露检测" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/28/LeakCanary内存泄露检测/">LeakCanary内存泄露检测</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/28/LeakCanary内存泄露检测/" class="archive-article-date">
+  	<time datetime="2018-03-28T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>LeakCanary简介</li>
+</ol>
+<ul>
+<li><p>LeakCanary是Square公司开源的一个检测内存的泄露的函数库，可以方便地和你的项目进行集成，在Debug版本中监控Activity、Fragment等的内存泄露</p>
+</li>
+<li><p>LeakCanary集成到项目中之后，在检测到内存泄露时，会发送消息到系统通知栏。点击后打开名称DisplayLeakActivity的页面，并显示泄露的跟踪信息，Logcat上面也会有对应的日志输出</p>
+</li>
+</ul>
+<ol>
+<li>内存泄漏简介</li>
+</ol>
+<ul>
+<li><p>为什么会产生内存泄漏？<br>当一个对象不需要使用本该回收时，有另外一个正在使用的对象持有它的引用，从而导致它不能回收停留在堆内存中，这就产生了内存泄漏</p>
+</li>
+<li><p>内存泄露对程序产生的影响？<br>内存泄漏是造成应用程序OOM的主要原因之一。Android系统为每个应用程序分配有限的内存，当应用中内存泄漏较多时，就难免会导致应用所需要的内存超出系统分配限额，从而导致OOM应用Crash</p>
+</li>
+</ul>
+<ol>
+<li>LeakCanary接入</li>
+</ol>
+<ul>
+<li><p>我们以LeakCanaryTest项目进行演示如何在项目中接入LeakCanary，项目目录如下：<br><img src="https://upload-images.jianshu.io/upload_images/5631872-20c158ad739db334.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522222494(1).png"><br>整个结构非常的简单如上图所示</p>
+</li>
+<li><p>在主项目main模块的build.gradle文件中添加LeakCanary相关依赖 -/main/build.gradle文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> dependencies &#123;</div><div class="line">    implementation fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">    implementation &apos;com.android.support:appcompat-v7:26.1.0&apos;</div><div class="line"></div><div class="line">    // 添加leakcanary相关的依赖</div><div class="line">    // 在release版本中，使用的是LeakCanary的no-op版本，也就是没有实际代码和操作的Wrapper版本</div><div class="line">    // 只包含LeakCanary和RefWatcher类的空实现，这样不会对生成的APK包体积和应用性能造成影响</div><div class="line">    debugImplementation &apos;com.squareup.leakcanary:leakcanary-android:1.5.4&apos;</div><div class="line">    releaseImplementation &apos;com.squareup.leakcanary:leakcanary-android-no-op:1.5.4&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化LeakCanary在主项目main模块的QApplication的onCreate()方法中初始化LeakCanary<br>leakcanary.com.leakcanarytest.FFApplication文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class FFApplication extends Application</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void onCreate()</div><div class="line">    &#123;</div><div class="line">        super.onCreate();</div><div class="line">        if (LeakCanary.isInAnalyzerProcess(this))</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        LeakCanary.install(this);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样我们就完成了一个项目的LeankCanary的简单接入</p>
+<ol>
+<li>LeakCanary检测<br>下面我们以常见内存—单例造成的内存泄露为例进行实践</li>
+</ol>
+<ul>
+<li>单例内存泄露模拟<br>LeakcanaryTest\app\src\main\java\leakcanary\com\leakcanarytest\TestManager.java<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TestManager</div><div class="line">&#123;</div><div class="line">    //单例静态特性使得单例的生命周期和应用的生命周期一样长</div><div class="line">    private static TestManager instance;</div><div class="line">    private Context context;</div><div class="line"></div><div class="line">    /**：</div><div class="line">     * 传入的是Application的Context，则生命周期和单例生命周期一样长；</div><div class="line">     * 传入的是Activity的Context，由于该Context和Activity的生命周期一样长，当Activity退出的时候它的内存不会被回收，因为单例对象持有它的引用；</div><div class="line">     */</div><div class="line">    private TestManager(Context context) &#123;</div><div class="line">        this.context = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static TestManager getInstance(Context context) &#123;</div><div class="line">        if (instance == null) &#123;</div><div class="line">            instance = new TestManager(context);</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>5.检测消息通知</p>
+<ul>
+<li><p>运行App到LeakCanaryActivit页面并退出，在检测到内存泄露的时候，会发送消息到系统通知栏如下图所示<br><img src="https://upload-images.jianshu.io/upload_images/5631872-ad0d4c3d93e7accf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522223392(1).png"><img src="https://upload-images.jianshu.io/upload_images/5631872-ce0e67c7a6db2fd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522223450(1).png"></p>
+</li>
+<li><p>对于开发人员这时可以很清晰的看到内存泄露了并及时修复代码！</p>
+</li>
+</ul>
+<ol>
+<li>LeakCanary原理</li>
+</ol>
+<ul>
+<li>源码里面的watch()函数会为被监控的对象创建一个KeyedWeakReference弱引用对象，是WeakReference对的子类，增加了键值对信息，后面会根据指定的键key找到弱引用对象</li>
+<li>在后台线程中，检查KeyedWeakReference弱引用是否已经被清除。如果没有，则触发一次GC，GC之后，如果弱引用对象依然存在，说明发生了内存泄露</li>
+</ul>
+<ol>
+<li>对于项目的好处</li>
+</ol>
+<ul>
+<li>对于开发人员来说，可以优化app代码，减少内存泄漏和bug,有利于后期维护</li>
+<li>对于测试人员，完善后的APP，可以大大减轻测试的难度和强度</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/28/LeakCanary内存泄露检测/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-View的事件分发机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
