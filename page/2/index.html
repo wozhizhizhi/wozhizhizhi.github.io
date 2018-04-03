@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Zstars的博客</title>
+  <title>Zstars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Zstars的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Zstars的博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zstars的博客">
@@ -155,209 +155,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-打造listview通用的Adapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/05/打造listview通用的Adapter/">打造listview通用的Adapter</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/05/打造listview通用的Adapter/" class="archive-article-date">
+  	<time datetime="2017-11-05T09:51:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-05</time>
+</a>
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="叙述"><a href="#叙述" class="headerlink" title="叙述"></a>叙述</h2><p>1.在Android开发中写Adapter是一件枯燥重复的工作。 对于Adapter一般都继承BaseAdapter写几个方法，getView里面用ViewHolder存储，这里我做一次Adapter封装，打造一个通用的Adapter,想写下来也是为了方便日后的查看，当然这里我们不谈<br>RecyclerView</p>
+<h2 id="下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter"><a href="#下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter" class="headerlink" title="下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter - -!"></a>下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter - -!</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">public class HomeAdapter extends BaseAdapter</div><div class="line">&#123;</div><div class="line">    private Context mContext;</div><div class="line">    private List&lt;HomeBean&gt; homeBeanList;</div><div class="line">    private LayoutInflater layoutInflater;</div><div class="line"></div><div class="line">    public HomeAdapter(Context mContext, List&lt;HomeBean&gt; homeBeanList)</div><div class="line">    &#123;</div><div class="line">        this.layoutInflater = LayoutInflater.from(mContext);</div><div class="line">        this.mContext = mContext;</div><div class="line">        this.homeBeanList = homeBeanList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount()</div><div class="line">    &#123;</div><div class="line">        if(homeBeanList == null || homeBeanList.size() &lt;= 0)</div><div class="line">        &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        return homeBeanList.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int position)</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        return homeBeanList.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position)</div><div class="line">    &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void refresh(List&lt;HomeBean&gt; datas)</div><div class="line">    &#123;</div><div class="line">        if (datas == null)</div><div class="line">        &#123;</div><div class="line">            datas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.homeBeanList = datas;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        ViewHodler viewHodler = null;</div><div class="line">        HomeBean homeBean = homeBeanList.get(position);</div><div class="line">        if (convertView == null)</div><div class="line">        &#123;</div><div class="line">            viewHodler = new ViewHodler();</div><div class="line">            convertView = layoutInflater.inflate(R.layout.home_item , parent , false);</div><div class="line">            viewHodler.home_item_icon = convertView.findViewById(R.id.home_item_icon);</div><div class="line">            viewHodler.home_item_text = convertView.findViewById(R.id.home_item_text);</div><div class="line">            viewHodler.home_item_price = convertView.findViewById(R.id.home_item_price);</div><div class="line">            convertView.setTag(viewHodler);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            viewHodler = (ViewHodler) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        ImageLoadUtils.loadImage(mContext , homeBean.getImageUrl().getUrl() , viewHodler.home_item_icon);</div><div class="line">        viewHodler.home_item_text.setText(homeBean.getTitle());</div><div class="line">      viewHodler.home_item_price.setText(homeBean.getPrice());</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class ViewHodler</div><div class="line">    &#123;</div><div class="line">        private TextView home_item_text;</div><div class="line">        private TextView home_item_price;</div><div class="line">        private ImageView home_item_icon;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>这一种写法相信大家都写的很熟了，我就不多说了下面我们看看如何写通用的adapter<br>1.新建一个class,写好通用的HodlerView，代码如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line">   public class FuHodlerView</div><div class="line">&#123;</div><div class="line">    private final SparseArray&lt;View&gt; mViews;</div><div class="line">    private final int mPositiom;</div><div class="line">    private final View mConvertView;</div><div class="line"></div><div class="line">    public FuHodlerView(ViewGroup parent , int layoutId , int position)</div><div class="line">    &#123;</div><div class="line">        this.mPositiom = position;</div><div class="line">        mViews = new SparseArray&lt;&gt;();</div><div class="line">        mConvertView = LayoutInflater.from(parent.getContext()).inflate(layoutId , parent , false);</div><div class="line">        // setTag()</div><div class="line">        mConvertView.setTag(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 拿到全部的views</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public SparseArray&lt;View&gt; getAllViews()</div><div class="line">    &#123;</div><div class="line">        return mViews;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     *  拿到一个viewHodler对象</div><div class="line">     * @param convertView</div><div class="line">     * @param parent</div><div class="line">     * @param layoutId</div><div class="line">     * @param position</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static FuHodlerView get(View convertView , ViewGroup parent , int layoutId , int position)</div><div class="line">    &#123;</div><div class="line">        if(convertView == null)</div><div class="line">        &#123;</div><div class="line">            return new FuHodlerView(parent , layoutId ,position);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            return (FuHodlerView) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public View getConvertView()</div><div class="line">    &#123;</div><div class="line">        return mConvertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 通过控件的Id获取对于的控件，如果没有则加入views</div><div class="line">     * @param viewId</div><div class="line">     * @param &lt;T&gt;</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public &lt;T extends View&gt; T getView(int viewId)</div><div class="line">    &#123;</div><div class="line">       View view = mViews.get(viewId);</div><div class="line">       if(view == null)</div><div class="line">       &#123;</div><div class="line">           view = mConvertView.findViewById(viewId);</div><div class="line">       &#125;</div><div class="line">       mViews.put(viewId , view);</div><div class="line">       return (T) view;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为TextView设置字符串</div><div class="line">     * @param viewId</div><div class="line">     * @param text</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setText(int viewId , CharSequence text)</div><div class="line">    &#123;</div><div class="line">        TextView textView = getView(viewId);</div><div class="line">        textView.setText(text);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为Imageview设置本地图片</div><div class="line">     * @param viewId</div><div class="line">     * @param drawableId</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setImageResource(int viewId , int drawableId)</div><div class="line">    &#123;</div><div class="line">        ImageView imageView = getView(viewId);</div><div class="line">        imageView.setImageResource(drawableId);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为Imageview设置网络图片</div><div class="line">     * @param viewId</div><div class="line">     * @param url</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setImageByUrl(Context context ,int viewId , String url)</div><div class="line">    &#123;</div><div class="line">        ImageView imageView = getView(viewId);</div><div class="line">        ImageLoadUtils.loadImage(context , url , imageView);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getPositiom()</div><div class="line">    &#123;</div><div class="line">        return mPositiom;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>-代码注释的很清楚，大家可以自己看，我主要说的是这里用到了-SparseArray缓存我们itemView内部的子View，这样可以得到一个通用的ViewHolder，每次要创建ViewHolder的时候只需要传入我们的layoutId即可。<br>2.有了ViewHolder，下面我们就可以打造通用的adapter了，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line">public abstract class FuBaseAdapter&lt;T&gt; extends BaseAdapter implements AbsListView.OnScrollListener</div><div class="line">&#123;</div><div class="line">    protected Collection&lt;T&gt; mDatas;</div><div class="line">    private final int mItemLayoutId;</div><div class="line">    private AbsListView mListView;</div><div class="line">    // 是否在滑动</div><div class="line">    private boolean isScrolling;</div><div class="line">    private Context mContext;</div><div class="line">    private LayoutInflater inflater;</div><div class="line">    private AbsListView.OnScrollListener listener;</div><div class="line"></div><div class="line">    public FuBaseAdapter(AbsListView listView , Collection&lt;T&gt; mDatas , int mItemLayoutId)</div><div class="line">    &#123;</div><div class="line">        if(mDatas == null)</div><div class="line">        &#123;</div><div class="line">            mDatas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.mDatas = mDatas;</div><div class="line">        this.mListView = listView;</div><div class="line">        this.mItemLayoutId = mItemLayoutId;</div><div class="line">        mContext = listView.getContext();</div><div class="line">        inflater = LayoutInflater.from(mContext);</div><div class="line">        mListView.setOnScrollListener(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 刷新数据</div><div class="line">    public void refresh(Collection&lt;T&gt; mDatas)</div><div class="line">    &#123;</div><div class="line">        if(mDatas == null)</div><div class="line">        &#123;</div><div class="line">            mDatas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.mDatas = mDatas;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void addOnScrollListener(AbsListView.OnScrollListener l)</div><div class="line">    &#123;</div><div class="line">        this.listener = l;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount()</div><div class="line">    &#123;</div><div class="line">        if (mDatas == null || mDatas.size() &lt;= 0)</div><div class="line">        &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        return mDatas.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public T getItem(int position)</div><div class="line">    &#123;</div><div class="line">        if (mDatas instanceof List)</div><div class="line">        &#123;</div><div class="line">            return ((List&lt;T&gt;) mDatas).get(position);</div><div class="line">        &#125;</div><div class="line">        else if (mDatas instanceof Set)</div><div class="line">        &#123;</div><div class="line">            return new ArrayList&lt;T&gt;(mDatas).get(position);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position)</div><div class="line">    &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        final FuHodlerView fuHodlerView = getViewHodler(position , convertView ,parent);</div><div class="line">        convert(fuHodlerView , getItem(position) , isScrolling ,position);</div><div class="line">        return fuHodlerView.getConvertView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public FuHodlerView getViewHodler(int position , View convertView , ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        return FuHodlerView.get(convertView , parent , mItemLayoutId , position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void convert(FuHodlerView helper , T item , boolean isScrolling)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void convert(FuHodlerView helper , T item , boolean isScrolling , int position)</div><div class="line">    &#123;</div><div class="line">        convert(helper, getItem(position), isScrolling);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onScrollStateChanged(AbsListView view, int scrollState)</div><div class="line">    &#123;</div><div class="line">        // 当前没有滚动的时候</div><div class="line">        if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE)</div><div class="line">        &#123;</div><div class="line">            isScrolling = false;</div><div class="line">            this.notifyDataSetChanged();</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            isScrolling = true;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if(listener != null)</div><div class="line">        &#123;</div><div class="line">            listener.onScrollStateChanged(view , scrollState);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)</div><div class="line">    &#123;</div><div class="line">        if(listener != null)</div><div class="line">        &#123;</div><div class="line">            listener.onScroll(view , firstVisibleItem , visibleItemCount , totalItemCount);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>-在这里我继承了OnScrollListener，这里主要是为了做一个优化即滚动时不加载图片<br>3.最关键的时候到了，怎使用呢只需继承我们通用的Adapter，请看代码,代码是最好的老师<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class HomeFuAdapter extends FuBaseAdapter&lt;HomeBean&gt;</div><div class="line">&#123;</div><div class="line"></div><div class="line">    public HomeFuAdapter(AbsListView listView, List&lt;HomeBean&gt; mDatas)</div><div class="line">    &#123;</div><div class="line">        super(listView, mDatas, R.layout.home_item);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void convert(FuHodlerView helper, HomeBean item, boolean isScrolling)</div><div class="line">    &#123;</div><div class="line">        Context context = helper.getConvertView().getContext();</div><div class="line">        if(isScrolling)</div><div class="line">        &#123;</div><div class="line">            ImageView imageView = helper.getView(R.id.home_item_icon);</div><div class="line">            ImageLoadUtils.loadImage(context , item.getImageUrl().getUrl() ,imageView);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            helper.setImageByUrl(context , R.id.home_item_icon , item.getImageUrl().getUrl());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        helper.setText(R.id.home_item_text , item.getTitle());</div><div class="line">        helper.setText(R.id.home_item_price , item.getPrice());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>-大功告成简简单单的几行代码搞定，然后在Activity里面new HomeFuAdapter……这么简单我就不写了小伙伴们自己可以搞定的，剩下的时间可以在QQ群和一群群友们吹吹水聊聊天了！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/03/项目构建/" class="archive-article-date">
-  	<time datetime="2018-04-03T11:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/项目构建/">项目构建</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/05/打造listview通用的Adapter/">展开全文 >></a>
+        </p>
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/28/LeakCanary内存泄露检测/" class="archive-article-date">
-  	<time datetime="2018-03-28T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/28/LeakCanary内存泄露检测/">LeakCanary内存泄露检测</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/01/View的事件分发机制/" class="archive-article-date">
-  	<time datetime="2018-03-01T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/01/View的事件分发机制/">View的事件分发机制</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/05/一款简单易用的天气app/" class="archive-article-date">
-  	<time datetime="2018-02-05T12:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/05/一款简单易用的天气app/">一款简单易用的天气app</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/" class="archive-article-date">
-  	<time datetime="2018-02-02T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">一款历史搜索记录功能的自定义搜索框</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/12/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2018-01-12T12:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/12/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/10/瞎玩android之太极/" class="archive-article-date">
-  	<time datetime="2018-01-10T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/10/瞎玩android之太极/">瞎玩android之太极</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
-
-    
 
 
           </div>
@@ -385,9 +258,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

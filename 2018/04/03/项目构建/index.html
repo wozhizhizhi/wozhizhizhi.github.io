@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Zstars的博客</title>
+  <title>项目构建 | Zstars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zstars的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="项目构建由于最近要开发新的项目,所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构  网络层采用OKHttp + Rxjava进行封装后形成独立的网络库 整体项目结构采用mvp的模式和模块化思想，为什么在新项目中选用这种模式，简单来说有以下几点:(1)降低耦合度(2)代码复用(3)隐藏数据(4)代码灵活(5)利于后期维护和扩展 网络层我已封装在netLibrary里面，它将作为单独的库文件引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目构建">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/项目构建/index.html">
 <meta property="og:site_name" content="Zstars的博客">
+<meta property="og:description" content="项目构建由于最近要开发新的项目,所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构  网络层采用OKHttp + Rxjava进行封装后形成独立的网络库 整体项目结构采用mvp的模式和模块化思想，为什么在新项目中选用这种模式，简单来说有以下几点:(1)降低耦合度(2)代码复用(3)隐藏数据(4)代码灵活(5)利于后期维护和扩展 网络层我已封装在netLibrary里面，它将作为单独的库文件引">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-44cdb5c799a23ab5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-41cba203c21e0e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-5f2a2475fd582503.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-48a68aee857ceed3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-1308c3d8a93722d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-03T12:53:23.269Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zstars的博客">
+<meta name="twitter:title" content="项目构建">
+<meta name="twitter:description" content="项目构建由于最近要开发新的项目,所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构  网络层采用OKHttp + Rxjava进行封装后形成独立的网络库 整体项目结构采用mvp的模式和模块化思想，为什么在新项目中选用这种模式，简单来说有以下几点:(1)降低耦合度(2)代码复用(3)隐藏数据(4)代码灵活(5)利于后期维护和扩展 网络层我已封装在netLibrary里面，它将作为单独的库文件引">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5631872-44cdb5c799a23ab5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Zstars的博客" type="application/atom+xml">
   
@@ -153,211 +163,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-项目构建" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      项目构建
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/03/项目构建/" class="archive-article-date">
+
+        
+        <a href="/2018/04/03/项目构建/" class="archive-article-date">
   	<time datetime="2018-04-03T11:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/项目构建/">项目构建</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><h6 id="由于最近要开发新的项目-所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构"><a href="#由于最近要开发新的项目-所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构" class="headerlink" title="由于最近要开发新的项目,所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构"></a>由于最近要开发新的项目,所以自己抽了一些时间来搭建项目框架，下面是项目的整体结构</h6><p><img src="https://upload-images.jianshu.io/upload_images/5631872-44cdb5c799a23ab5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522311169(1).png"></p>
+<ul>
+<li>网络层采用OKHttp + Rxjava进行封装后形成独立的网络库</li>
+<li>整体项目结构采用mvp的模式和模块化思想，为什么在新项目中选用这种模式，简单来说有以下几点:<br>(1)降低耦合度<br>(2)代码复用<br>(3)隐藏数据<br>(4)代码灵活<br>(5)利于后期维护和扩展</li>
+<li>网络层我已封装在netLibrary里面，它将作为单独的库文件引用到项目之中，使用非常方便，下面以登录为例<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class ServerApi</div><div class="line">&#123;</div><div class="line">    // 登录</div><div class="line">    public static &lt;T&gt; Observable&lt;T&gt; getLogin(Type type, String url , String account , String password , String realPassword , int loginType)</div><div class="line">    &#123;</div><div class="line">        HttpParams params = new HttpParams();</div><div class="line">        params.put(&quot;account&quot;, account);</div><div class="line">        params.put(&quot;password&quot;, password);</div><div class="line">        params.put(&quot;realPassword&quot;, realPassword);</div><div class="line">        params.put(&quot;loginType&quot;, loginType);</div><div class="line">        return RxUtils.request(HttpMethod.POST, url, type, params);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以很方便的完成网络请求</p>
+<ul>
+<li><p>图片加载框架使用Glide,这是被google所推荐的图片加载库，现在已经被广泛使用各个项目中<br>登录的功能，登录层作为一个模块保存,运行之后效果如下图所示<br><img src="https://upload-images.jianshu.io/upload_images/5631872-41cba203c21e0e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="[图片上传中...(1522316418(1).png-4fa1c8-1522316479375-0)]
+"><br><img src="https://upload-images.jianshu.io/upload_images/5631872-5f2a2475fd582503.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522316418(1).png"><br>登录功能的结构如下<br><img src="https://upload-images.jianshu.io/upload_images/5631872-48a68aee857ceed3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>LoginActivity代码如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line">public class LoginActivity extends BaseActivity implements View.OnClickListener , LoginView</div><div class="line">&#123;</div><div class="line">    @BindView(R.id.et_username)</div><div class="line">    EditText etUsername;</div><div class="line">    @BindView(R.id.rl_username)</div><div class="line">    RelativeLayout rlUsername;</div><div class="line">    @BindView(R.id.et_pwd)</div><div class="line">    EditText etPwd;</div><div class="line">    @BindView(R.id.rl_pwd)</div><div class="line">    RelativeLayout rlPwd;</div><div class="line">    @BindView(R.id.llc_login)</div><div class="line">    LinearLayoutCompat llcLogin;</div><div class="line">    @BindView(R.id.tv_forgetpwd)</div><div class="line">    TextView tvForgetpwd;</div><div class="line">    @BindView(R.id.btn_login)</div><div class="line">    Button btnLogin;</div><div class="line">    @BindView(R.id.btn_register)</div><div class="line">    TextView btnRegister;</div><div class="line">    private LoginPresenter presenter;</div><div class="line">    private String userName;</div><div class="line">    private String pwd;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected int getContentResId()</div><div class="line">    &#123;</div><div class="line">        return R.layout.activity_login;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void initView()</div><div class="line">    &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void initPresenter()</div><div class="line">    &#123;</div><div class="line">        presenter = new LoginPresenter(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick(View v)</div><div class="line">    &#123;</div><div class="line">        switch (v.getId())</div><div class="line">        &#123;</div><div class="line">            case R.id.btn_login:</div><div class="line">                userName = etUsername.getText().toString();</div><div class="line">                pwd = etPwd.getText().toString();</div><div class="line">                if (TextUtils.isEmpty(userName))</div><div class="line">                &#123;</div><div class="line">                    showToast(getString(R.string.input_phone_tip));</div><div class="line">                    return;</div><div class="line">                &#125;</div><div class="line">                if (TextUtils.isEmpty(pwd))</div><div class="line">                &#123;</div><div class="line">                    showToast(getString(R.string.input_pwd_tip));</div><div class="line">                    return;</div><div class="line">                &#125;</div><div class="line">                if (pwd.length() &lt; 6)</div><div class="line">                &#123;</div><div class="line">                    showToast(getString(R.string.input_pwd_error_tip));</div><div class="line">                    return;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                getLoginData(userName, pwd);</div><div class="line">                break;</div><div class="line">                default:</div><div class="line">                    break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void initData()</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void getLoginData(String userName , String pwd)</div><div class="line">    &#123;</div><div class="line">        presenter.LoadData(userName , pwd);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void setListener()</div><div class="line">    &#123;</div><div class="line">        btnLogin.setOnClickListener(this);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void setStatusBar()</div><div class="line">    &#123;</div><div class="line">        // 设置状态栏全透明</div><div class="line">        StatusBarUtil.setTransparent(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void newDatas(LoginDto data)</div><div class="line">    &#123;</div><div class="line">        LoginManager.getInstance().saveToken(data.token);</div><div class="line">        openPage(LoginActivity.this , MainActivity.class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void showLoadFailMsg(Throwable e)</div><div class="line">    &#123;</div><div class="line">        //请求失败</div><div class="line">        e.printStackTrace();</div><div class="line">        showToast(&quot;请求失败&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onSubscribe(Disposable d)</div><div class="line">    &#123;</div><div class="line">        addDisposable(d);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>从代码层面来说整个LoginActivity看上去非常的简洁干净,降低了以后的维护的成本，好的代码也能让开发人员快速定位bug解决问题，为以后打好基础<br>关于打包这一块, 我用的是Jenkins+Git+Gradle实现自动打包 , 一个是节省了开发人员的时间，二是可以满足各方面的打包需求,测试人员可以自己打包测试<br><img src="https://upload-images.jianshu.io/upload_images/5631872-1308c3d8a93722d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li>OK!大功告成</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/04/03/项目构建/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/28/LeakCanary内存泄露检测/" class="archive-article-date">
-  	<time datetime="2018-03-28T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/28/LeakCanary内存泄露检测/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeakCanary内存泄露检测</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/28/LeakCanary内存泄露检测/">LeakCanary内存泄露检测</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/01/View的事件分发机制/" class="archive-article-date">
-  	<time datetime="2018-03-01T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/01/View的事件分发机制/">View的事件分发机制</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/05/一款简单易用的天气app/" class="archive-article-date">
-  	<time datetime="2018-02-05T12:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/05/一款简单易用的天气app/">一款简单易用的天气app</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/" class="archive-article-date">
-  	<time datetime="2018-02-02T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">一款历史搜索记录功能的自定义搜索框</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/12/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2018-01-12T12:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/12/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/10/瞎玩android之太极/" class="archive-article-date">
-  	<time datetime="2018-01-10T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/10/瞎玩android之太极/">瞎玩android之太极</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -386,8 +362,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
