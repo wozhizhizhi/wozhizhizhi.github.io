@@ -155,6 +155,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-最新版Jenkins+Git加上Android3.0自动打包发包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jenkins分为两种，一种是自带服务也就是安装版本（不需要tomcat服务器自带servlet）, 另外是提供war版本，我这次是使用的安装版本，我个人建议的时还是使用tomcat + war的方式（会少很多坑，但是也有不足首先所有的东西会在C盘生成.Jenkins文件夹，有一些强迫症的，喜欢目录整洁，还是选择安装板吧），下面给出三种下载地址:</p>
+<ul>
+<li><a href="https://jenkins.io/" target="_blank" rel="external">安装版官网地址</a></li>
+<li><a href="http://mirrors.jenkins.io/war/" target="_blank" rel="external">war包地址</a></li>
+<li><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="external">tomcat9地址</a><br>安装板的安装非常的简单,一直下一步下一步就好接着往下走我们上主菜了</li>
+</ul>
+<ol>
+<li>安装好了之后,直接打开网页输入<a href="http://locahost:8080,首次运行会要求输入管理员密码，如下图所示,图片上会显示密码的放置地址，看到没/Users/dmx/.jenkins/secrets/initialAdminPassword，这个地址就代表放置密码的位置，打开文件拷贝出密码输入就行" target="_blank" rel="external">http://locahost:8080,首次运行会要求输入管理员密码，如下图所示,图片上会显示密码的放置地址，看到没/Users/dmx/.jenkins/secrets/initialAdminPassword，这个地址就代表放置密码的位置，打开文件拷贝出密码输入就行</a><br><img src="https://upload-images.jianshu.io/upload_images/5631872-a32de783bfb54ee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="219825-519a8219e02114eb.png"></li>
+<li><p>接着会跳出下面的界面，一般我们会选择第一项推荐安装，等安装完成后进入到页面<br><img src="https://upload-images.jianshu.io/upload_images/5631872-8180f6181ba70bca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="219825-519a8219e02114eb.png"></p>
+</li>
+<li><p>下面就是创建用户页面，这里建议创建用户，下面提供了Continue as admin按钮也可进入主页，但是后期想创建用户还是很麻烦的，所以建议创建用户<br>创建好用户，就可以进入到主页了~选择系统管理-&gt;管理插件-&gt;可选插件来开始安装我们需要的插件<br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="_blank" rel="external">Git plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Gradle+Plugin" target="_blank" rel="external">Gradle Plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin" target="_blank" rel="external">Email Extension Plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Description+Setter+Plugin" target="_blank" rel="external">description setter plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Build+Name+Setter+Plugin" target="_blank" rel="external">build-name-setter</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Build+User+Vars+Plugin" target="_blank" rel="external">user build vars plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/PostBuildScript+Plugin" target="_blank" rel="external">Post-Build Script Plug-in</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Branch+API+Plugin" target="_blank" rel="external">Branch API Plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/SSH+plugin" target="_blank" rel="external">SSH plugin</a><br><a href="https://link.jianshu.com?t=http://wiki.jenkins-ci.org/display/JENKINS/Scriptler+Plugin" target="_blank" rel="external">Scriptler</a><br><a href="https://wiki.jenkins.io/display/JENKINS/Date+Parameter+Plugin" target="_blank" rel="external">Date Parameter Plug-in</a><br><a href="https://link.jianshu.com?t=https://wiki.jenkins-ci.org/display/JENKINS/Git+Parameter+Plugin" target="_blank" rel="external">Git Parameter Plug-In</a><br>必要的插件列表：<br>1.Branch API Plugin<br>2.build timeout plugin<br>3.build-name-setter<br>4.Credentials Binding Plugin<br>5.description setter plugin<br>6.Dynamic Parameter Plug-in<br>7.Environment Injector Plugin<br>9.GIT server Plugin<br>10.Gradle Plugin<br>11.Git Parameter Plug-In<br>12.Pipeline: Basic Steps<br>13.Pipeline: Build Step<br>14.Pipeline: Input Step<br>15.Pipeline: Nodes and Processes<br>16.Pipeline: Stage Step<br>17.Workspace Cleanup Plugin<br>18.Post-Build Script Plug-in<br>19.Email Extension Plugin<br>20.SSH Slaves plugin<br>21.Timestamper<br>如果你使用的SVN 还需要安装<br>Subversion Plug-in<br>Subversion Release Manager plugin</p>
+</li>
+</ol>
+<p>上面的这些插件你先全部安装下来选择的时候点直接安装就好(安装好后重启服务输入<a href="http://127.0.0.1:8080/restart)，这里面有些我是写重复了,还有一些是已经过时了搜索不到了，这个可以不用管，你把能装的全部先安装上去就行,注意插件比较多，保证网络状态良好否则个别容易失败，需要重新安装" target="_blank" rel="external">http://127.0.0.1:8080/restart)，这里面有些我是写重复了,还有一些是已经过时了搜索不到了，这个可以不用管，你把能装的全部先安装上去就行,注意插件比较多，保证网络状态良好否则个别容易失败，需要重新安装</a></p>
+<ol>
+<li>Jenkins配置（这是重点）<br>进入：系统管理→系统设置<br>先设置3个变量的环境（这么做是为了在打包的时候遇到坑，血的教训啊！相信我没错的）<br>选择环境变量点击增加如图：<br><img src="https://upload-images.jianshu.io/upload_images/5631872-6c700d8fda6fc93e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522812604(1).png"><br>PYTHON是以后生成二维码图片用到的，还没到那一步可以先不用设置，ANDROID_HOME是SDK的路径(不要忘记环境变量G:\android\android-sdk\platform-tools;G:\android\android-sdk\tools的添加)<br>GRADLE_USER_HOME这个是干嘛的呢，说来就是血泪史了，困惑了我好久，我打包时因为一个java aapt的异常一直打包失败，这个异常跟aapt2不同,aapt2只需要在gradle.properties中加上android.enableAapt2=false就好，而这错误就是因为路径问题导致到，再仔细查看错误日志之后才发现路径错了，所以如果你使用的时安装版记得加上这个路径<br>环境配置：<br>找到 JDK、Gradle、Git 三个模块最好把jdk和git加入电脑的环境变量。<br>JDK :<br>别名=随意。<br>JAVA_HOME=即环境变量中JAVA_HOME中的内容</li>
+</ol>
+<p>Git<br>别名=随意<br>Path to Git  = git.exe文件的全路径（d:\Git\bin\git.exe）<br><img src="https://upload-images.jianshu.io/upload_images/5631872-fdb96030d858b284.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522813192(1).png"></p>
+<p>Gradle:<br>别名=随意<br>GRADLE_HOME= gradle的安装目录路径xx/gradle\gradle-2.14.1<br><img src="https://upload-images.jianshu.io/upload_images/5631872-b05571d883bd12be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522813220(1).png"><br>可以直接配置android studio 安装目录中的gradle<br>如果你使用android studio 直接更新过gradle，他们在 系统盘\users\用户名.gradle\wrapper\dist目录下。<br>gradle可以配置多个，兼容不同编译版本我配置了2个4.1和2.14.1<br>5.打包设置<br>新建→构建一个自由风格的软件项目，进入到新建项目后，填写名称及说明。<br>找到→源码管理，选择对应的代码管理工具，我这里使用的是git<br>填写信息：<br><img src="https://upload-images.jianshu.io/upload_images/5631872-3cbe445feee31ee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>使用git还需要添加认证，即账号登陆，点击Add输入git账号信息<br>接下来选择→构建插件<br>我们准备的是gradle,所以选择 Invoke Gradle script<br>选择配置的gradle的版本，在 taks 栏输入 命令：clean assembleRelease –stacktrace –debug点击保存<br>无属性构建<br>点击立即构建，在 build history可看到任务执行。<br>任务前有个蓝色小圆点，如果项目构建失败，任务前的小圆点为红色，构建成功依然为蓝色。<br>同时在Console Output中可查看构建日志， 日志最后出现Finished: SUCCESS，即构建成功。<br>如果出现 Finished:Failed构建失败，日志内容比较多，直接全局搜索error查看报错信息。<br>进入→工作空间中可看到和工程目录一样的结构，找到apk包。<br>以上就完成了简单的部署和构建<br>6.<strong>Jenkins自定义参数配置，和二维码生成</strong><br>自定义属性配置<br>使用自定义属性，我们需要使用到gradle文件和properties文件<br>配置需要使用的自定义属性<br>gradle.properties文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> android.enableAapt2=false</div><div class="line">APP_VERSION = 1.0.0</div><div class="line">IS_JENKINS = false</div><div class="line">BUILD_TYPE = debug</div><div class="line">PRODUCT_FLAVORS = xiaomi</div><div class="line">ALIAS_PASSWORD = 123456</div><div class="line">STORE_PASSWORD = 123456</div><div class="line">BUILD_PATH_JENKINS = E:\\Jenkins\\workspace\\StarTeacher\\JenkinsApk</div><div class="line">BUILD_PATH_LOCAL = E:\\AS_PROJECT\\TestJenkins</div><div class="line">BUILD_TIME= &apos;&apos;</div><div class="line">STORE_FILE=G:/android/zhangwork/StarTeacher/keystore/star.jks</div><div class="line">APPNAME=starteacher</div></pre></td></tr></table></figure></p>
+<p>BUILD_PATH_JENKINS 这个设定的目录我是建立在Jenkins安装目录的workspace里面的项目里面，这样做是问了方便访问的到路径<br>app的.gradle文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;com.android.application&apos;</div><div class="line"></div><div class="line">def getDate() &#123;</div><div class="line">    def date = new Date()</div><div class="line">    def formattedDate = date.format(&apos;yyyyMMddHHmm&apos;)</div><div class="line">    return formattedDate</div><div class="line">&#125;</div><div class="line">def verCode = 1000000</div><div class="line">android &#123;</div><div class="line">    compileSdkVersion 26</div><div class="line">    packagingOptions &#123;</div><div class="line">        exclude &apos;META-INF/LICENSE&apos;</div><div class="line">        exclude &apos;META-INF/NOTICE&apos;</div><div class="line">    &#125;</div><div class="line">    defaultConfig &#123;</div><div class="line">        applicationId &quot;com.shinyread.starteacher&quot;</div><div class="line">        minSdkVersion 19</div><div class="line">        targetSdkVersion 26</div><div class="line">        versionCode verCode</div><div class="line">        versionName APP_VERSION</div><div class="line">        multiDexEnabled true</div><div class="line">        flavorDimensions &quot;versionCode&quot;</div><div class="line">        // 打包排除以下文件，屏蔽因as自身bug，在没有重复引用jar时，提示jar重复引用的问题</div><div class="line">        packagingOptions &#123;</div><div class="line">            exclude &apos;META-INF/rxjava.properties&apos;</div><div class="line">            exclude &apos;META-INF/DEPENDENCIES.txt&apos;</div><div class="line">            exclude &apos;META-INF/NOTICE&apos;</div><div class="line">            exclude &apos;META-INF/NOTICE.txt&apos;</div><div class="line">            exclude &apos;META-INF/LICENSE&apos;</div><div class="line">            exclude &apos;META-INF/LICENSE.txt&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    signingConfigs &#123;</div><div class="line">        signingConfig &#123;</div><div class="line">            keyAlias &apos;star&apos;</div><div class="line">            keyPassword ALIAS_PASSWORD</div><div class="line">            storeFile file(STORE_FILE)</div><div class="line">            storePassword STORE_PASSWORD</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            minifyEnabled true</div><div class="line">            zipAlignEnabled true</div><div class="line">            shrinkResources true</div><div class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</div><div class="line">            signingConfig signingConfigs.signingConfig</div><div class="line">        &#125;</div><div class="line">        debug &#123;</div><div class="line">            signingConfig signingConfigs.signingConfig</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    flavorDimensions &quot;default&quot;</div><div class="line">    productFlavors &#123;</div><div class="line">        commonsoon &#123;dimension &quot;default&quot;&#125;</div><div class="line">        xiaomi &#123;dimension &quot;default&quot;&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    productFlavors.all &#123;</div><div class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</div><div class="line">    &#125;</div><div class="line">    //修改生成的apk名字及输出文件夹</div><div class="line">    applicationVariants.all &#123; variant -&gt;</div><div class="line">        variant.outputs.all &#123;</div><div class="line">            //新名字</div><div class="line">            def newName</div><div class="line">            //时间戳</div><div class="line">            def timeNow</div><div class="line">            //输出文件夹</div><div class="line">            def outDirectory</div><div class="line">            //是否为Jenkins打包，输出路径不同</div><div class="line">            if (&quot;true&quot;.equals(IS_JENKINS)) &#123;</div><div class="line">                //Jenkins打包输出到服务器路径</div><div class="line">                timeNow = BUILD_TIME</div><div class="line">                //BUILD_PATH为服务器输出路径</div><div class="line">                outDirectory = BUILD_PATH_JENKINS</div><div class="line"></div><div class="line">                variant.getPackageApplication().outputDirectory = new File(outDirectory + &quot;/&quot; + timeNow)</div><div class="line"></div><div class="line">                //AutoBuildTest-v1.0.1-xiaomi-release.apk</div><div class="line">                newName=APPNAME+&apos;_&apos;+APP_VERSION+&quot;_$&#123;variant.productFlavors[0].name&#125;_&quot;+variant.buildType.name+&apos;.apk&apos;</div><div class="line">            &#125; else &#123;</div><div class="line">                //本机打包输出在本机路径</div><div class="line">                timeNow = getDate()</div><div class="line">                outDirectory = BUILD_PATH_LOCAL</div><div class="line">                if (&apos;debug&apos;.equals(variant.buildType.name)) &#123;</div><div class="line">                    newName=APPNAME+&quot;_$&#123;variant.productFlavors[0].name&#125;_&quot;+&quot;$&#123;APP_VERSION&#125;_debug.apk&quot;</div><div class="line">                &#125; else &#123;</div><div class="line">                    variant.getPackageApplication().outputDirectory = new File(outDirectory + &quot;/&quot; + timeNow)</div><div class="line">                    //AutoBuildTest-v1.0.1-xiaomi-release.apk</div><div class="line">                    newName=APPNAME+&quot;_$&#123;variant.productFlavors[0].name&#125;_&quot;+APP_VERSION+&apos;_&apos;+variant.buildType.name+&apos;.apk&apos;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            outputFileName=newName</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中variant.getPackageApplication().outputDirectory = new File(outDirectory + “/“ + timeNow)是为了自定义apk的输出路径这个跟旧版本的方法不一样<br>下面我们进入到Jenkins对上述参数进行对应配置。<br>找到 <strong>参数化构建过程选项→打勾</strong><br>选择→<strong>添加参数</strong></p>
+<ul>
+<li>选项参数使用 Peristent Choice Paramete</li>
+<li>字符输入参数使用 String Parameter</li>
+<li>时间参数使用 Date Parameter</li>
+<li>在添加参数时，配置Name的值必须与.properties文件中定义的参数名称相同<br><img src="https://upload-images.jianshu.io/upload_images/5631872-91f5b4cb31682fb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="https://upload-images.jianshu.io/upload_images/5631872-3de748c0fbc32564.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522817621(1).png"></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/5631872-88cc8f946f9e2ea6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522817662(1).png"><br>参数引用<br>找到上面我们使用Gradle 插件的 Invoke Gradle script<br>修改tasks命令clean assemble${PRODUCT_FLAVORS}${BUILD_TYPE} –stacktrace –debug<br>并勾选选项如下图<br><img src="https://upload-images.jianshu.io/upload_images/5631872-85d1aa74e38cce13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522820745(1).png"><br>最后进入项目配置找到→构建环境→勾选Set build Name 设置参数<br><img src="https://upload-images.jianshu.io/upload_images/5631872-3df4d4b768992b43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522820885(1).png"><br>点击应用保存，回到项目首页<br>就可以看到，原先的立即构建已经变成了Build with Parameter<br>点击参数构建，就可以看到如下上面我们配置的参数。<br>等待构建完成，前往在.Gradle文件中配置的路径中即可找到我们配置的命名apk，同时也可以看到我们生成好的项目如图<br><img src="https://upload-images.jianshu.io/upload_images/5631872-fbfb0a0eae110ae4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522821061(1).png"></p>
+<ol>
+<li>生成二维码<br>这里必须用到Python这个语言<br>下载安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fwww.python.org%2Fdownloads%2F" target="_blank" rel="external">Python</a><br>注意安装时要选上pip这个选项打钩<br>依次配置环境变量在path里面配置E:\Python\Scripts\;E:\Python;这两项路径填你自己的路径<br>然后命令行输入 pip list 检查是否安装成功</li>
+</ol>
+<p>安装图片支持插件Pillow和二维码生成库<strong><a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fsylnsfar%2Fqrcode" target="_blank" rel="external">qrcode</a></strong><br><strong>安装Pillow命令：pip install -I –no-cache-dir -v Pillow</strong><br><strong>安装qrcode 命令：pip install myqr</strong><br>这时我们要配置PYTHON的全局环境了,上面开始的时候我已经放了图片,具体位置看上图<br><strong>生成二维码</strong><br>进入项目→构建→增加构建步骤，选择Execute windows batch command,<br>填写生成二维码的命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myqr http://127.0.0.1:8080/job/StarTeacher/ws/JenkinsApk/%BUILD_TIME%/%APPNAME%_%APP_VERSION%_%PRODUCT_FLAVORS%_%BUILD_TYPE%.apk -v 1 -l L -d E:/Jenkins/workspace/StarTeacher/JenkinsApk/%BUILD_TIME%</div></pre></td></tr></table></figure></p>
+<p><strong>如果你是tomcat呢要怎么做?</strong><br>进入tomcat安装目录conf找到server.xml文件，在Host节点中添加如下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context  reloadable=&quot;true&quot; docBase=&quot;E://JenkinsApk&quot; crossContext=&quot;true&quot;         path=&quot;/JenkinsApk&quot;/&gt;</div></pre></td></tr></table></figure></p>
+<p>重启确保你能访问<a href="http://localhost:8080/JenkinsApk，最后只需要在二维码的命令中替换地址就好" target="_blank" rel="external">http://localhost:8080/JenkinsApk，最后只需要在二维码的命令中替换地址就好</a><br><strong>展示二维码</strong><br>找到构建后操作 → 增加构建后操作步骤→Set build description如下图<br><img src="https://upload-images.jianshu.io/upload_images/5631872-01d2b551c382e18d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>完整写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;img src=&apos;http://127.0.0.1:8080/job/StarTeacher/ws/JenkinsApk/$&#123;BUILD_TIME&#125;/qrcode.png&apos; width=200px height=200px &gt; &lt;br&gt; &lt;a href=&apos;http://127.0.0.1:8080/job/StarTeacher/ws/JenkinsApk/$&#123;BUILD_TIME&#125;/$&#123;APPNAME&#125;_$&#123;APP_VERSION&#125;_$&#123;PRODUCT_FLAVORS&#125;_$&#123;BUILD_TYPE&#125;.apk&apos;&gt;点击下载-V$&#123;APP_VERSION&#125;.apk&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>OK大功告成看看最后的效果吧！惊喜不惊喜啊记得在全局安全配置里面把Markup Formatter的设置更改为Safe HTML，不然是不支持HTML显示的<br><img src="https://upload-images.jianshu.io/upload_images/5631872-2c78dc4bee517995.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522823585.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/05/最新版Jenkins+Git加上Android3.0自动打包发包/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-项目构建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -925,91 +1007,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/11/为什么使用Tinker/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何实现账号强制下线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/25/如何实现账号强制下线/">如何实现账号强制下线</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/25/如何实现账号强制下线/" class="archive-article-date">
-  	<time datetime="2017-11-25T12:33:54.003Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="如何实现账号强制下线"><a href="#如何实现账号强制下线" class="headerlink" title="如何实现账号强制下线"></a>如何实现账号强制下线</h1><ul>
-<li>强制用户下线这个功能大家应该见过很多了，到底怎么实现呢现在我们一起来做一做</li>
-</ul>
-<ol>
-<li><p>建立activity的管理类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  public class ActivityCollector</div><div class="line">  &#123;</div><div class="line">    public static List&lt;Activity&gt; activityList = new ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    public static void addActivity(Activity activity)</div><div class="line">    &#123;</div><div class="line">        activityList.add(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void removeActivity(Activity activity)</div><div class="line">    &#123;</div><div class="line">        activityList.remove(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void finshAllActivity()</div><div class="line">    &#123;</div><div class="line">        for(Activity activity : activityList)</div><div class="line">        &#123;</div><div class="line">            if (!activity.isFinishing())</div><div class="line">            &#123;</div><div class="line">                activity.finish();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立基本的activity,BaseActivity,所有的Activity都继承它，在oncreate , onResume,onDestroy添加以下代码，会注意到这里注册了一个广播，之所以要在BaseActivity里面注册是是因为以后的每个Activity都会继承BaseActivity,这个就可以保证每个界面都可以接收这个广播</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">  public class BaseActivity extends AppCompatActivity</div><div class="line">&#123;</div><div class="line">    private ForceOffineReceiver forceOffineReceiver;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(@Nullable Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        ActivityCollector.addActivity(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume()</div><div class="line">    &#123;</div><div class="line">        super.onResume();</div><div class="line">        IntentFilter intentFilter = new IntentFilter();</div><div class="line">        intentFilter.addAction(&quot;com.zz.mybreadcast.FORCE_OFFINE&quot;);</div><div class="line">        forceOffineReceiver = new ForceOffineReceiver();</div><div class="line">        registerReceiver(forceOffineReceiver , intentFilter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy()</div><div class="line">    &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        ActivityCollector.removeActivity(this);</div><div class="line">        if (forceOffineReceiver != null)</div><div class="line">        &#123;</div><div class="line">            unregisterReceiver(forceOffineReceiver);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立一个登陆的界面，界面很简单，界面我就不贴了<br><img src="http://upload-images.jianshu.io/upload_images/5631872-0e73e0cde8df2a41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1511504182(1).png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">  public class LoginActivity extends BaseActivity</div><div class="line">&#123;</div><div class="line">    private EditText login_view;</div><div class="line">    private EditText password_view;</div><div class="line">    private Button login_button;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line">        initView();</div><div class="line">        initData();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initView()</div><div class="line">    &#123;</div><div class="line">        login_view = findViewById(R.id.login_view);</div><div class="line">        password_view = findViewById(R.id.password_view);</div><div class="line">        login_button = findViewById(R.id.login_button);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initData()</div><div class="line">    &#123;</div><div class="line">        login_button.setOnClickListener(v -&gt;</div><div class="line">        &#123;</div><div class="line">            String loginStr = login_view.getText().toString().trim();</div><div class="line">            String passwordStr = password_view.getText().toString().trim();</div><div class="line">            if(loginStr.equals(&quot;admin&quot;) &amp;&amp; passwordStr.equals(&quot;123456&quot;))</div><div class="line">            &#123;</div><div class="line">                startActivity(new Intent(this , MainActivity.class));</div><div class="line">                finish();</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                Toast.makeText(LoginActivity.this , &quot;账号或者密码错误!&quot; , Toast.LENGTH_LONG);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立广播，代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class ForceOffineReceiver extends BroadcastReceiver</div><div class="line">&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onReceive(Context context, Intent intent)</div><div class="line">    &#123;</div><div class="line">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</div><div class="line">        builder.setTitle(&quot;提示&quot;);</div><div class="line">        builder.setCancelable(false);</div><div class="line">        builder.setMessage(&quot;您的账号在另外一台手机已经登录！&quot;);</div><div class="line">        builder.setPositiveButton(&quot;确定&quot; , new DialogInterface.OnClickListener()&#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(DialogInterface dialog, int which)</div><div class="line">            &#123;</div><div class="line">                ActivityCollector.finshAllActivity();</div><div class="line">                context.startActivity(new Intent(context , LoginActivity.class));</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        builder.show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>最后是MainActivity，这个类里面只需模仿发送下线广播就行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends BaseActivity</div><div class="line">&#123;</div><div class="line">    private Button main_button;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        main_button = findViewById(R.id.main_button);</div><div class="line">        // lambda表达式</div><div class="line">        main_button.setOnClickListener(v -&gt; &#123;</div><div class="line">            Intent intent = new Intent(&quot;com.zz.mybreadcast.FORCE_OFFINE&quot;);</div><div class="line">            sendBroadcast(intent);</div><div class="line">       &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>别忘记在配置文件里面注册哦！<br><a href="http://you3000.cn" target="_blank" rel="external">博客</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/25/如何实现账号强制下线/">展开全文 >></a>
         </p>
       
 
