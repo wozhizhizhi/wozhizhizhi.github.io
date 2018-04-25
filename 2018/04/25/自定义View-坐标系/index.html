@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>自定义View-坐标系 | Zstars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自定义View-坐标系一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子Vie">
+  <meta name="description" content="一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子View左上角距父View顶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义View-坐标系">
 <meta property="og:url" content="http://yoursite.com/2018/04/25/自定义View-坐标系/index.html">
 <meta property="og:site_name" content="Zstars的博客">
-<meta property="og:description" content="自定义View-坐标系一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子Vie">
+<meta property="og:description" content="一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子View左上角距父View顶">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-c4e5493a3fa13e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-fc1885fad70d3bac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-c93bd80c47a17ad8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-eb127ef43a9fd3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-96146b3cff02f57f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-04-25T15:54:16.558Z">
+<meta property="og:updated_time" content="2018-04-25T15:57:55.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View-坐标系">
-<meta name="twitter:description" content="自定义View-坐标系一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子Vie">
+<meta name="twitter:description" content="一.手机屏幕坐标系和数学坐标系的区别一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：（这里的∠a 是对应的，注意y轴方向）   实际屏幕上的默认坐标系如下：  比如棕色部分为手机屏幕 二.View的坐标系注意：View的坐标系统是相对于父控件而言的. 12345678//获取子View左上角距父View顶">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5631872-c4e5493a3fa13e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Zstars的博客" type="application/atom+xml">
@@ -183,7 +183,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="自定义View-坐标系"><a href="#自定义View-坐标系" class="headerlink" title="自定义View-坐标系"></a>自定义View-坐标系</h1><h2 id="一-手机屏幕坐标系和数学坐标系的区别"><a href="#一-手机屏幕坐标系和数学坐标系的区别" class="headerlink" title="一.手机屏幕坐标系和数学坐标系的区别"></a>一.手机屏幕坐标系和数学坐标系的区别</h2><p>一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：<br>（<strong>这里的∠a 是对应的，注意y轴方向</strong>）</p>
+        <h2 id="一-手机屏幕坐标系和数学坐标系的区别"><a href="#一-手机屏幕坐标系和数学坐标系的区别" class="headerlink" title="一.手机屏幕坐标系和数学坐标系的区别"></a>一.手机屏幕坐标系和数学坐标系的区别</h2><p>一般定义屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向， 所以在手机屏幕上的坐标系与数学中常见的坐标系是有一些差别的，详情如下：<br>（<strong>这里的∠a 是对应的，注意y轴方向</strong>）</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/5631872-c4e5493a3fa13e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数学里面坐标系"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/5631872-fc1885fad70d3bac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓屏幕里面坐标系"></p>
 <p><strong>实际屏幕上的默认坐标系如下：</strong></p>
