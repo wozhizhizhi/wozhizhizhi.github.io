@@ -155,6 +155,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Flutter的初次尝试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/Flutter的初次尝试/">Flutter的初次尝试</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/25/Flutter的初次尝试/" class="archive-article-date">
+  	<time datetime="2018-04-25T12:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Flutter是什么"><a href="#Flutter是什么" class="headerlink" title="Flutter是什么"></a>Flutter是什么</h4><p>什么是Flutter<br>Flutter是一个移动应用程序的软件开发工具包（SDK），用一个代码库构建高性能、高保真的iOS和Android应用程序。目标是使开发人员能够为Android和iOS提供自然的高质量的应用，在滚动行为、排版、图标等方面实现零差异。<br><strong>安装的方法</strong></p>
+<ol>
+<li>打开一个新的Cmd或PowerShell窗口，运行以下命令使用Git安装Flutter<br> git clone <a href="https://github.com/flutter/flutter.git" target="_blank" rel="external">https://github.com/flutter/flutter.git</a><br> 在控制面板&gt;系统和安全&gt;系统&gt;高级系统设置&gt;环境变量，Path变量中添加Flutter的路径<br> C:[你的Flutter路径]\flutter\bin<br> 安装完成后，再打开一个新的Cmd或PowerShell窗口，并运行以下命令来查看是否需要安装依赖关系以完成      安装<br>flutter doctor<br>等待安装完成<br><strong>在Androidstudio里面如何配置</strong><br>很简单在设置setting插件选项里面去搜索并下载Flutter和Dart插件，安装成功之后去重启<br><strong>一个flutter的小实验</strong><ul>
+<li>写一个列表项，新建项目之后我们可以看到如下的结构，这里要注意了现在我们的所有代码都在lib里面的.dart文件里面，这个的划分我开始也懵逼了好久<br><img src="https://upload-images.jianshu.io/upload_images/5631872-011bdbacf6045532.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NR3{(`UNDG9YL9$CA73E}08.png"></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>直接上代码吧，列表的子项,在flutter里面是没有xml的，所有的布局都是代码完成，其次dart的语法其实我是写的非常蛋疼，嵌套如此之多，真是很不习惯,可能是初次使用吧！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/material.dart&apos;;</div><div class="line">class Product</div><div class="line">&#123;</div><div class="line">  const Product(&#123;this.name&#125;);</div><div class="line">  final String name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">typedef void CartChangCallback(Product product , bool inCart);</div><div class="line">class ShoppingListItem extends StatelessWidget</div><div class="line">&#123;</div><div class="line">  ShoppingListItem(&#123;Product product, this.inCart, this.onCartChange&#125;)</div><div class="line">  : product = product,</div><div class="line">  super(key:new ObjectKey(product));</div><div class="line">  final Product product;</div><div class="line">  final bool inCart;</div><div class="line">  final CartChangCallback onCartChange;</div><div class="line"></div><div class="line">  Color getColorIn(BuildContext context)</div><div class="line">  &#123;</div><div class="line">    return inCart ? Colors.black54 : Theme.of(context).primaryColor;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  TextStyle getTextStyle(BuildContext context)</div><div class="line">  &#123;</div><div class="line">    return new TextStyle(color: Colors.black54 , decoration:  TextDecoration.lineThrough);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context)</div><div class="line">  &#123;</div><div class="line">    return new ListTile(onTap: ()&#123;onCartChange(product , inCart);&#125; , </div><div class="line">      leading: new CircleAvatar(backgroundColor: getColorIn(context), child: new Text(product.name[0]),),</div><div class="line">    title: new Text(product.name , style: getTextStyle(context)),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>main.dart里面有void main()方法这个方法相当于一个入口,接下来就是把我们列表展示出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/material.dart&apos;;</div><div class="line">import &apos;views/ShoppingListItem.dart&apos;;</div><div class="line"></div><div class="line">class ShoppingList extends StatefulWidget</div><div class="line">&#123;</div><div class="line">  ShoppingList(&#123;Key key , this.products&#125;)</div><div class="line">  :super(key:key);</div><div class="line">  final List&lt;Product&gt; products;</div><div class="line">  ShoppingListState createState() =&gt; new ShoppingListState();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ShoppingListState extends State&lt;ShoppingList&gt;</div><div class="line">&#123;</div><div class="line">  Set&lt;Product&gt; shoppingCart = new Set&lt;Product&gt;();</div><div class="line">  void handCartChanged(Product product , bool inCart)</div><div class="line">  &#123;</div><div class="line">    setState(() &#123;</div><div class="line">      if (inCart)</div><div class="line">      &#123;</div><div class="line">        shoppingCart.add(product);</div><div class="line">      &#125;</div><div class="line">      else</div><div class="line">      &#123;</div><div class="line">        shoppingCart.remove(product);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    return new Scaffold(</div><div class="line">      appBar: new AppBar(</div><div class="line">        title: new Text(&quot;购物清单&quot;),</div><div class="line">      ),</div><div class="line"></div><div class="line">      body: new ListView(children: widget.products.map(</div><div class="line">    (Product product)&#123;</div><div class="line">      return new ShoppingListItem(</div><div class="line">        product: product,</div><div class="line">        inCart: shoppingCart.contains(product),</div><div class="line">        onCartChange: handCartChanged,</div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">      ).toList()</div><div class="line">      ),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">final List&lt;Product&gt; kProducts = &lt;Product&gt;[</div><div class="line">  new Product(name: &apos;牛肉面&apos;),</div><div class="line">  new Product(name: &apos;牛肉&apos;),</div><div class="line">  new Product(name: &apos;柴米油盐&apos;),</div><div class="line">  new Product(name: &apos;巧克力脆皮&apos;)</div><div class="line">];</div><div class="line"></div><div class="line">void main() =&gt; runApp(</div><div class="line">    new MaterialApp(</div><div class="line">      title: &apos;商店&apos;,</div><div class="line">      home: new ShoppingList(products: kProducts),</div><div class="line">    )</div><div class="line"></div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>效果如图：<br><img src="https://upload-images.jianshu.io/upload_images/5631872-291f90bd8b9d9b7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"><br>目前所知这套系统是为google的正在开发的新系统Fuchsia做好准备，但是目前一切都是未知，怎么说呢多知道一些总是好的！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/25/Flutter的初次尝试/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-自定义View-坐标系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -929,91 +1007,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/10/瞎玩android之太极/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C++笔记(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/11/C++笔记(1)/">C++笔记（1）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/11/C++笔记(1)/" class="archive-article-date">
-  	<time datetime="2017-12-11T13:08:12.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="编写自己的第一个应用程序“Hello-C-”"><a href="#编写自己的第一个应用程序“Hello-C-”" class="headerlink" title="编写自己的第一个应用程序“Hello C++”"></a>编写自己的第一个应用程序“Hello C++”</h1><ul>
-<li>最近在学习C++，希望能把自己理解到的记录下，第一个是为了以后好复习，第二是为了与大家一起分享自己的学习经验,共同走向人生的巅峰，万一实现了呢！<h4 id="选用学习工具"><a href="#选用学习工具" class="headerlink" title="选用学习工具"></a>选用学习工具</h4></li>
-<li><p>在工具上面，网上有很多争论，有人说学习中，要从原始开始，不能先用IDE，要自己配置环境等，这样就能很好的掌握，于是你按照大牛的说法开始安装GCC ， vim等一系列的工具包，最好弄了大半天的时间发现自己连个hello world都没有写出来，精疲力尽之后自己放弃了。</p>
-</li>
-<li><p>当然我不是反对这种做法，只是我们初学者往往都是有一个兴趣期，当你折腾了大半天，兴趣也消耗完了，最后还是卡在工具的安装这里，那不是最大的折磨，所以我的学习工具篇，是从VS2017开始，简简单单的安装，打出”Hello C++”,带我进入C++的大门。</p>
-<h4 id="工具的安装"><a href="#工具的安装" class="headerlink" title="工具的安装"></a>工具的安装</h4></li>
-<li>VS2017地址</li>
-</ul>
-<ol>
-<li><a href="https://www.visualstudio.com/zh-hans/downloads/" target="_blank" rel="external">https://www.visualstudio.com/zh-hans/downloads/</a></li>
-<li>下载Visual Studio Community 2017 这个是免费的，其他的先不要看了收费的，下载这个版本就行，然后点开下一步下一步，遇到登录页不要管直接Skip next</li>
-<li>有人说VS很大,不过2017版做的很好，我可以自由选择安装组件，由于我们只用到C++ 所以组件只选择C/C++,按照下图<br><img src="http://upload-images.jianshu.io/upload_images/5631872-da9461b4054eb846.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></li>
-<li>等待安装成功即可，成功打开如下图<br><img src="http://upload-images.jianshu.io/upload_images/5631872-cfef099b1b4fca40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512977790(1).png"><h4 id="建立我的第一个项目"><a href="#建立我的第一个项目" class="headerlink" title="建立我的第一个项目"></a>建立我的第一个项目</h4></li>
-<li>点击左上角的文件(F),打开新建-&gt;项目，会弹出一个界面，选择Window桌面向导，项目名称可以根据你自己的喜好更改，会到达下图所示<br><img src="http://upload-images.jianshu.io/upload_images/5631872-f6c90a77b522435a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512977828(1).png"></li>
-<li>点击确定，勾选空项目 ，然后静待项目生成<br><img src="http://upload-images.jianshu.io/upload_images/5631872-7c8697839259c6e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512978107(1).png"></li>
-<li>这时在VS的右边可以看到我们生成的项目Procject1<img src="http://upload-images.jianshu.io/upload_images/5631872-365ced611b13ec15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512978320(1).png"><h4 id="编写我们的入门代码"><a href="#编写我们的入门代码" class="headerlink" title="编写我们的入门代码"></a>编写我们的入门代码</h4></li>
-<li>选择源文件，右键添加新项，选择C++ 文件(.cpp)，C++的文件是以.cpp结尾，在文件上写上以下代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	std::cout &lt;&lt; &quot;Hello C++&quot; &lt;&lt; std::endl;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>int main()其实就相当于java的main函数一样是一个入口函数，并且一个项目中只会有一个main函数，简单来说这个函数的格式是固定的写法，你想要执行的C++程序要写在里面</li>
-<li>cout代表的输出，要使用它要引用库文件iostream,写法如上图所示，但是要注意的是你并不能直接使用cout &lt;&lt; “Hello C++”,必须写入相应的空间名称std,这个我们在这里先不说，后面会学习到，然后点击F5,会看到程序屏幕一闪就没了，不要紧张，正常现象，因为程序执行完了啊–！，在编写的c++程序中，如果是窗口不想让其消失，在程序中添加：system(“pause”);注意放在return之前，不然会执行不到了，再次运行，哈哈庆祝一下，C++的世界我要来了！<br><img src="http://upload-images.jianshu.io/upload_images/5631872-8f0d9e01daf02059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"><br><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/11/C++笔记(1)/">展开全文 >></a>
         </p>
       
 
