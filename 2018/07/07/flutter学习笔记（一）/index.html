@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Zstars的博客</title>
+  <title>flutter学习笔记（一） | Zstars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zstars的博客">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="Android的打包过程  创建keystore证书如果您已经创建过证书则可以跳过这一步。若要创建新的证书，请在命令行中执行如下命令：  keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key  在应用中引用keystore证书  创建一个名为/android/key.p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flutter学习笔记（一）">
+<meta property="og:url" content="http://yoursite.com/2018/07/07/flutter学习笔记（一）/index.html">
 <meta property="og:site_name" content="Zstars的博客">
+<meta property="og:description" content="Android的打包过程  创建keystore证书如果您已经创建过证书则可以跳过这一步。若要创建新的证书，请在命令行中执行如下命令：  keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key  在应用中引用keystore证书  创建一个名为/android/key.p">
+<meta property="og:updated_time" content="2018-07-07T13:31:30.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zstars的博客">
+<meta name="twitter:title" content="flutter学习笔记（一）">
+<meta name="twitter:description" content="Android的打包过程  创建keystore证书如果您已经创建过证书则可以跳过这一步。若要创建新的证书，请在命令行中执行如下命令：  keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key  在应用中引用keystore证书  创建一个名为/android/key.p">
   
     <link rel="alternative" href="/atom.xml" title="Zstars的博客" type="application/atom+xml">
   
@@ -153,197 +157,205 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-flutter学习笔记（一）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flutter学习笔记（一）
+    </h1>
+  
+
+        
+        <a href="/2018/07/07/flutter学习笔记（一）/" class="archive-article-date">
+  	<time datetime="2018-07-07T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Android的打包过程</strong></p>
+<ol>
+<li>创建keystore证书<br>如果您已经创建过证书则可以跳过这一步。若要创建新的证书，请在命令行中执行如下命令：</li>
+</ol>
+<p>keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key</p>
+<ol>
+<li>在应用中引用keystore证书</li>
+</ol>
+<p>创建一个名为<app dir="">/android/key.properties的文件，其中包含对密钥库的引用：</app></p>
+<p>storePassword=&lt;上一步中输入的 store 密码&gt;<br>keyPassword=&lt;上一步中输入的 key 密码&gt;<br>keyAlias=key<br>storeFile=<keystore 文件的位置，="" 例如：="" users="" <user="" name="">/key.jks&gt;</keystore></p>
+<ol>
+<li>在 gradle 中配置签名选项</li>
+</ol>
+<p>通过编辑<app dir="">/android/app/build.gradle文件为您的应用配置签名</app></p>
+<p>1.找到android {，然后替换为您包含证书引用的配置文件:</p>
+<p>def keystorePropertiesFile = rootProject.file(“key.properties”)<br>def keystoreProperties = new Properties()<br>keystoreProperties.load(new FileInputStream(keystorePropertiesFile))</p>
+<p>android {</p>
+<p>2.替换:</p>
+<p>buildTypes {<br>    release {<br>        // TODO: Add your own signing config for the release build.<br>        // Signing with the debug keys for now, so  flutter run –release  works.<br>        signingConfig signingConfigs.debug<br>    }<br>}</p>
+<p>为如下内容:</p>
+<p>signingConfigs {<br>    release {<br>        keyAlias keystoreProperties[‘keyAlias’]<br>        keyPassword keystoreProperties[‘keyPassword’]<br>        storeFile file(keystoreProperties[‘storeFile’])<br>        storePassword keystoreProperties[‘storePassword’]<br>    }<br>}<br>buildTypes {<br>    release {<br>        signingConfig signingConfigs.release<br>    }<br>}</p>
+<ol>
+<li>构建 release 版应用</li>
+</ol>
+<p>在命令行使用:</p>
+<p>cd <app dir=""> (用您应用工程的根目录替换<app dir=""> )。</app></app></p>
+<p>运行flutter build apk (flutter build命令默认使用–release)。</p>
+<p>您应用的release版本的APK会生成在<app dir="">/build/app/outputs/apk/app-release.apk</app></p>
+<ol>
+<li>将 release 版本的 APK 安装到设备上</li>
+</ol>
+<p>使用命令行:</p>
+<ul>
+<li>用USB您的Android设备连接到您的电脑</li>
+<li>cd <app dir=""> .</app></li>
+<li>运行 flutter install .</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/12/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2018-01-12T12:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/12/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/10/瞎玩android之太极/" class="archive-article-date">
-  	<time datetime="2018-01-10T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/10/瞎玩android之太极/">瞎玩android之太极</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/11/C++笔记(1)/" class="archive-article-date">
-  	<time datetime="2017-12-11T13:08:12.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/11/C++笔记(1)/">C++笔记（1）</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/07/07/flutter学习笔记（一）/" alt="微信分享二维码">
+    </div>
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/11/为什么使用Tinker/" class="archive-article-date">
-  	<time datetime="2017-12-11T13:05:44.751Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/07/08/flutter学习之功能小应用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          flutter功能小应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/10/Flutter的初次尝试/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Flutter的初次尝试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/11/为什么使用Tinker/">为什么使用Tinker</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/25/如何实现账号强制下线/" class="archive-article-date">
-  	<time datetime="2017-11-25T12:33:54.004Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/25/如何实现账号强制下线/">如何实现账号强制下线</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/05/打造listview通用的Adapter/" class="archive-article-date">
-  	<time datetime="2017-11-05T09:51:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/05/打造listview通用的Adapter/">打造listview通用的Adapter</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -373,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
