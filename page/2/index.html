@@ -155,6 +155,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-一款历史搜索记录功能的自定义搜索框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">一款历史搜索记录功能的自定义搜索框</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/" class="archive-article-date">
+  	<time datetime="2018-02-02T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="SearchLayout-weight"><a href="#SearchLayout-weight" class="headerlink" title="SearchLayout_weight"></a>SearchLayout_weight</h4><p><img src="http://upload-images.jianshu.io/upload_images/5631872-909ddff917ed6493.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"></p>
+<ul>
+<li>使用简单高度自定义<h2 id="步骤1：导入控件库"><a href="#步骤1：导入控件库" class="headerlink" title="步骤1：导入控件库"></a>步骤1：导入控件库</h2></li>
+<li><p>root build.gradle写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">allprojects &#123;</div><div class="line">		repositories &#123;</div><div class="line">			...</div><div class="line">			maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Gradle引入依赖 build.Gradle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	        compile &apos;com.github.wozhizhizhi:SearchLayout_weight:v1.0&apos;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="步骤2：设置搜索框"><a href="#步骤2：设置搜索框" class="headerlink" title="步骤2：设置搜索框"></a>步骤2：设置搜索框</h2><ul>
+<li>在XML文件中进行设置 activity_search.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;com.aji.searchlayoutview.SearchView</div><div class="line">        android:id=&quot;@+id/search_view&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        app:textSizeSearch=&quot;5dp&quot;</div><div class="line">        app:textColorSearch=&quot;#9b9b9b&quot;</div><div class="line">        app:textHintSearch=&quot;请输入查询的关键字&quot;</div><div class="line">        app:searchBlockHeight=&quot;150&quot;</div><div class="line">        app:searchBlockColor=&quot;#ffffff&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="步骤3：代码使用"><a href="#步骤3：代码使用" class="headerlink" title="步骤3：代码使用"></a>步骤3：代码使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity</div><div class="line">&#123;</div><div class="line"></div><div class="line">    // 1. 初始化搜索框变量</div><div class="line">    private SearchView searchView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        // 2. 绑定视图</div><div class="line">        setContentView(R.layout.activity_search);</div><div class="line"></div><div class="line">        // 3. 绑定组件</div><div class="line">        searchView = (SearchView) findViewById(R.id.search_view);</div><div class="line"></div><div class="line">        // 4. 设置点击搜索按键后的操作（通过回调接口）</div><div class="line">        // 参数 = 搜索框输入的内容</div><div class="line">        searchView.setOnClickSearch(new ICallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void SearchAciton(String string)</div><div class="line">            &#123;</div><div class="line">                System.out.println(&quot;我收到了&quot; + string);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 5. 设置点击返回按键后的操作（通过回调接口）</div><div class="line">        searchView.setOnClickBack(new BCallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void BackAciton() &#123;</div><div class="line">                finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/SearchLayout_weight" target="_blank" rel="external">完整DEMO</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-设计模式之单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -780,6 +860,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

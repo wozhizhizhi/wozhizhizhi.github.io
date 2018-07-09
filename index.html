@@ -155,6 +155,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-flutter学习笔记（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/09/flutter学习笔记（二）/">flutter学习笔记（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/09/flutter学习笔记（二）/" class="archive-article-date">
+  	<time datetime="2018-07-09T14:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="本地访问-MethodChannel"><a href="#本地访问-MethodChannel" class="headerlink" title="本地访问-MethodChannel"></a>本地访问-MethodChannel</h2><ol>
+<li>本地访问是指跨平台的解决方案，有访问本地android或者ios资源的能力,主要是MethodChannel和MessageChannel两种，第一种是调用方法，第二种是传递信息。通信的双方是Flutter和本地操作系统或者应用，而且方法的调用和消息的方法可以从任何一方发起，类似远程过程调用。</li>
+</ol>
+<ul>
+<li>Flutter是一个比较独立的环境，要想访问本地的资源，Flutter提供了Channel机制，类似Cilent-Server模式或者RPC</li>
+<li>通过Channel的名称打通Channel，隧道</li>
+<li>Flutter和本地是对称的，请求可以从任何一发发起，这篇文章主要是记录从Flutter给本地发送请求</li>
+</ul>
+<hr>
+<ul>
+<li>首先我们创建Flutte工程,ide随你自己喜欢，修改UI代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/material.dart&apos;;</div><div class="line">import &apos;package:flutter/services.dart&apos;;</div><div class="line">import &apos;dart:async&apos;;</div><div class="line"></div><div class="line">void main() =&gt; runApp(new MyApp());</div><div class="line"></div><div class="line">class MyApp extends StatelessWidget &#123;</div><div class="line">  // This widget is the root of your application.</div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    return new MaterialApp(</div><div class="line">      title: &apos;Flutter Demo&apos;,</div><div class="line">      theme: new ThemeData(</div><div class="line">        primarySwatch: Colors.blue,</div><div class="line">      ),</div><div class="line">      home: new MyHomePage(title: &apos;Flutter Demo Home Page&apos;),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyHomePage extends StatefulWidget &#123;</div><div class="line">  final String title;</div><div class="line">  @override</div><div class="line">  _MyHomePageState createState() =&gt; new _MyHomePageState();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class _MyHomePageState extends State&lt;MyHomePage&gt; &#123;</div><div class="line">  int _counter = 0;</div><div class="line">  static const platformMethodChannel = const MethodChannel(&quot;com.xyjy.flutterchannel/test&quot;);</div><div class="line">  num nativeMessage = 0;</div><div class="line"></div><div class="line">  void _incrementCounter() &#123;</div><div class="line">    setState(() &#123;</div><div class="line">      _counter++;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Future&lt;Null&gt; getData() async&#123;</div><div class="line">    num _message;</div><div class="line">      try&#123;</div><div class="line">        final num result = await platformMethodChannel.invokeMethod(&quot;getTime&quot;);</div><div class="line">        _message = result;</div><div class="line">      &#125;</div><div class="line">      on PlatformException catch(e)&#123;</div><div class="line">        print(e.message);</div><div class="line">      &#125;</div><div class="line">      setState(() &#123;</div><div class="line">        nativeMessage = _message;</div><div class="line">      &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    return new Scaffold(</div><div class="line">      appBar: new AppBar(</div><div class="line">        // Here we take the value from the MyHomePage object that was created by</div><div class="line">        // the App.build method, and use it to set our appbar title.</div><div class="line">        title: new Text(widget.title),</div><div class="line">      ),</div><div class="line">      body: new Center(</div><div class="line">          mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">          children: &lt;Widget&gt;[</div><div class="line">            new Text(</div><div class="line">              &quot;$nativeMessage&quot;,</div><div class="line">            ),</div><div class="line">            new Text(</div><div class="line">              &apos;$nativeMessage&apos;,</div><div class="line">              style: Theme.of(context).textTheme.display1,</div><div class="line">            ),</div><div class="line">          ],</div><div class="line">        ),</div><div class="line">      ),</div><div class="line">      floatingActionButton: new FloatingActionButton(</div><div class="line">        onPressed: ()=&gt;getData(),</div><div class="line">        tooltip: &apos;Increment&apos;,</div><div class="line">        child: new Icon(Icons.add),</div><div class="line">      ), // This trailing comma makes auto-formatting nicer for build methods.</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>很简单我只是将_counter显示的替换成了自己定义的nativeMessage，接着往下</li>
+</ul>
+<ol>
+<li><p>首先我们要引入service包和async包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/services.dart&apos;;</div><div class="line">import &apos;dart:async&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>声明一个static const变量platformMethodChannel ，赋值MethodChannel类型的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class _MyHomePageState extends State&lt;MyHomePage&gt; &#123;</div><div class="line"> int _counter = 0;</div><div class="line"> static const platformMethodChannel = const MethodChannel(&quot;com.xyjy.flutterchannel/test&quot;);</div><div class="line"> num nativeMessage = 0;</div><div class="line"></div><div class="line"> void _incrementCounter() &#123;</div><div class="line">   setState(() &#123;</div><div class="line">     _counter++;</div><div class="line">   &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在上面我们要注意，给MethodChannel一个名字com.xyjy.flutterchannel/test,这个名字和本地（这里代表android部分）那边的要一样<br>我们创建了MethodChannel，我们准备一个用来发送请求的函数。我们创建一个叫getData的异步函数<br>await platformMethodChannel.invokeMethod(‘getTime’) 是调用本地的getTime方法，并且这个方法是异步的，await表示阻塞执行。<br>nativeMessage = _message; 表示通知Flutter状态改变，刷新界面。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Future&lt;Null&gt; getData() async&#123;</div><div class="line">   // num是数字类型</div><div class="line">   num _message;</div><div class="line">     try&#123;</div><div class="line">       final num result = await platformMethodChannel.invokeMethod(&quot;getTime&quot;);</div><div class="line">       _message = result;</div><div class="line">     &#125;</div><div class="line">     on PlatformException catch(e)&#123;</div><div class="line">       print(e.message);</div><div class="line">     &#125;</div><div class="line">     setState(() &#123;</div><div class="line">       nativeMessage = _message;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>修改build里面的显示，将_counter 替换为nativeMessage ，并将floatingActionButton的onTap事件替换为我们定义好的getData方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">@override</div><div class="line">Widget build(BuildContext context) &#123;</div><div class="line">  return new Scaffold(</div><div class="line">    appBar: new AppBar(</div><div class="line">      // Here we take the value from the MyHomePage object that was created by</div><div class="line">      // the App.build method, and use it to set our appbar title.</div><div class="line">      title: new Text(widget.title),</div><div class="line">    ),</div><div class="line">    body: new Center(</div><div class="line">        mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">        children: &lt;Widget&gt;[</div><div class="line">          new Text(</div><div class="line">            &quot;$nativeMessage&quot;,</div><div class="line">          ),</div><div class="line">          new Text(</div><div class="line">            &apos;$nativeMessage&apos;,</div><div class="line">            style: Theme.of(context).textTheme.display1,</div><div class="line">          ),</div><div class="line">        ],</div><div class="line">      ),</div><div class="line">    ),</div><div class="line">    floatingActionButton: new FloatingActionButton(</div><div class="line">      onPressed: ()=&gt;getData(),</div><div class="line">      tooltip: &apos;Increment&apos;,</div><div class="line">      child: new Icon(Icons.add),</div><div class="line">    ), // This trailing comma makes auto-formatting nicer for build methods.</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>接下来本地方法如何编写，打开MainActivity</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"> public class MainActivity extends FlutterActivity &#123;</div><div class="line">  private static final  String CHANNAL = &quot;com.xyjy.flutterchannel/test&quot;;</div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    GeneratedPluginRegistrant.registerWith(this);</div><div class="line">    new MethodChannel(getFlutterView() , CHANNAL).setMethodCallHandler(new MethodChannel.MethodCallHandler()</div><div class="line">    &#123;</div><div class="line">      @Override</div><div class="line">      public void onMethodCall(MethodCall methodCall, MethodChannel.Result result)</div><div class="line">      &#123;</div><div class="line">          if (methodCall.method.equals(&quot;getTime&quot;))</div><div class="line">          &#123;</div><div class="line">              long time = getTime();</div><div class="line">              result.success(time);</div><div class="line">          &#125;</div><div class="line">          else</div><div class="line">          &#123;</div><div class="line">            result.notImplemented();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private long getTime()</div><div class="line">  &#123;</div><div class="line">    return System.currentTimeMillis();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>CHANNAL 里面的字符串一定是与Flutter定义一致，在MethodChannel的中调用.setMethodCallHandler() 方法，需要一个MethodCallHandler 对象，是一个匿名内部类，有一个方法onMethodCall,在Flutter发送请求时，onMethodCall方法会执行， result.success(time);返回信息,这样就可以进行本地调用，点击悬浮按钮得到时间(此时的时间是通过本地返回的时间)<br><img src="https://upload-images.jianshu.io/upload_images/5631872-cb4e398f2846a43e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ图片20180709174145.png"></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/09/flutter学习笔记（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flutter学习之功能小应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -940,86 +1051,6 @@
 
 
   
-    <article id="post-一款历史搜索记录功能的自定义搜索框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">一款历史搜索记录功能的自定义搜索框</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/" class="archive-article-date">
-  	<time datetime="2018-02-02T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="SearchLayout-weight"><a href="#SearchLayout-weight" class="headerlink" title="SearchLayout_weight"></a>SearchLayout_weight</h4><p><img src="http://upload-images.jianshu.io/upload_images/5631872-909ddff917ed6493.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"></p>
-<ul>
-<li>使用简单高度自定义<h2 id="步骤1：导入控件库"><a href="#步骤1：导入控件库" class="headerlink" title="步骤1：导入控件库"></a>步骤1：导入控件库</h2></li>
-<li><p>root build.gradle写入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">allprojects &#123;</div><div class="line">		repositories &#123;</div><div class="line">			...</div><div class="line">			maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Gradle引入依赖 build.Gradle</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	        compile &apos;com.github.wozhizhizhi:SearchLayout_weight:v1.0&apos;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="步骤2：设置搜索框"><a href="#步骤2：设置搜索框" class="headerlink" title="步骤2：设置搜索框"></a>步骤2：设置搜索框</h2><ul>
-<li>在XML文件中进行设置 activity_search.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;com.aji.searchlayoutview.SearchView</div><div class="line">        android:id=&quot;@+id/search_view&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        app:textSizeSearch=&quot;5dp&quot;</div><div class="line">        app:textColorSearch=&quot;#9b9b9b&quot;</div><div class="line">        app:textHintSearch=&quot;请输入查询的关键字&quot;</div><div class="line">        app:searchBlockHeight=&quot;150&quot;</div><div class="line">        app:searchBlockColor=&quot;#ffffff&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="步骤3：代码使用"><a href="#步骤3：代码使用" class="headerlink" title="步骤3：代码使用"></a>步骤3：代码使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity</div><div class="line">&#123;</div><div class="line"></div><div class="line">    // 1. 初始化搜索框变量</div><div class="line">    private SearchView searchView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        // 2. 绑定视图</div><div class="line">        setContentView(R.layout.activity_search);</div><div class="line"></div><div class="line">        // 3. 绑定组件</div><div class="line">        searchView = (SearchView) findViewById(R.id.search_view);</div><div class="line"></div><div class="line">        // 4. 设置点击搜索按键后的操作（通过回调接口）</div><div class="line">        // 参数 = 搜索框输入的内容</div><div class="line">        searchView.setOnClickSearch(new ICallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void SearchAciton(String string)</div><div class="line">            &#123;</div><div class="line">                System.out.println(&quot;我收到了&quot; + string);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 5. 设置点击返回按键后的操作（通过回调接口）</div><div class="line">        searchView.setOnClickBack(new BCallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void BackAciton() &#123;</div><div class="line">                finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/SearchLayout_weight" target="_blank" rel="external">完整DEMO</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1121,6 +1152,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

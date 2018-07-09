@@ -6,23 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>LeakCanary内存泄露检测 | Zstars的博客</title>
+  <title>flutter学习笔记（二） | Zstars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LeakCanary简介   LeakCanary是Square公司开源的一个检测内存的泄露的函数库，可以方便地和你的项目进行集成，在Debug版本中监控Activity、Fragment等的内存泄露  LeakCanary集成到项目中之后，在检测到内存泄露时，会发送消息到系统通知栏。点击后打开名称DisplayLeakActivity的页面，并显示泄露的跟踪信息，Logcat上面也会有对应的日">
+  <meta name="description" content="本地访问-MethodChannel 本地访问是指跨平台的解决方案，有访问本地android或者ios资源的能力,主要是MethodChannel和MessageChannel两种，第一种是调用方法，第二种是传递信息。通信的双方是Flutter和本地操作系统或者应用，而且方法的调用和消息的方法可以从任何一方发起，类似远程过程调用。   Flutter是一个比较独立的环境，要想访问本地的资源，Flu">
+<meta name="keywords" content="flutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeakCanary内存泄露检测">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/LeakCanary内存泄露检测/index.html">
+<meta property="og:title" content="flutter学习笔记（二）">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/flutter学习笔记（二）/index.html">
 <meta property="og:site_name" content="Zstars的博客">
-<meta property="og:description" content="LeakCanary简介   LeakCanary是Square公司开源的一个检测内存的泄露的函数库，可以方便地和你的项目进行集成，在Debug版本中监控Activity、Fragment等的内存泄露  LeakCanary集成到项目中之后，在检测到内存泄露时，会发送消息到系统通知栏。点击后打开名称DisplayLeakActivity的页面，并显示泄露的跟踪信息，Logcat上面也会有对应的日">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-20c158ad739db334.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-ad0d4c3d93e7accf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-ce0e67c7a6db2fd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-28T12:44:46.334Z">
+<meta property="og:description" content="本地访问-MethodChannel 本地访问是指跨平台的解决方案，有访问本地android或者ios资源的能力,主要是MethodChannel和MessageChannel两种，第一种是调用方法，第二种是传递信息。通信的双方是Flutter和本地操作系统或者应用，而且方法的调用和消息的方法可以从任何一方发起，类似远程过程调用。   Flutter是一个比较独立的环境，要想访问本地的资源，Flu">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-cb4e398f2846a43e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-07-09T14:43:09.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeakCanary内存泄露检测">
-<meta name="twitter:description" content="LeakCanary简介   LeakCanary是Square公司开源的一个检测内存的泄露的函数库，可以方便地和你的项目进行集成，在Debug版本中监控Activity、Fragment等的内存泄露  LeakCanary集成到项目中之后，在检测到内存泄露时，会发送消息到系统通知栏。点击后打开名称DisplayLeakActivity的页面，并显示泄露的跟踪信息，Logcat上面也会有对应的日">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5631872-20c158ad739db334.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="flutter学习笔记（二）">
+<meta name="twitter:description" content="本地访问-MethodChannel 本地访问是指跨平台的解决方案，有访问本地android或者ios资源的能力,主要是MethodChannel和MessageChannel两种，第一种是调用方法，第二种是传递信息。通信的双方是Flutter和本地操作系统或者应用，而且方法的调用和消息的方法可以从任何一方发起，类似远程过程调用。   Flutter是一个比较独立的环境，要想访问本地的资源，Flu">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5631872-cb4e398f2846a43e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Zstars的博客" type="application/atom+xml">
   
@@ -162,87 +160,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LeakCanary内存泄露检测" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-flutter学习笔记（二）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      LeakCanary内存泄露检测
+      flutter学习笔记（二）
     </h1>
   
 
         
-        <a href="/2018/03/28/LeakCanary内存泄露检测/" class="archive-article-date">
-  	<time datetime="2018-03-28T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
+        <a href="/2018/07/09/flutter学习笔记（二）/" class="archive-article-date">
+  	<time datetime="2018-07-09T14:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>LeakCanary简介</li>
+        <h2 id="本地访问-MethodChannel"><a href="#本地访问-MethodChannel" class="headerlink" title="本地访问-MethodChannel"></a>本地访问-MethodChannel</h2><ol>
+<li>本地访问是指跨平台的解决方案，有访问本地android或者ios资源的能力,主要是MethodChannel和MessageChannel两种，第一种是调用方法，第二种是传递信息。通信的双方是Flutter和本地操作系统或者应用，而且方法的调用和消息的方法可以从任何一方发起，类似远程过程调用。</li>
 </ol>
 <ul>
-<li><p>LeakCanary是Square公司开源的一个检测内存的泄露的函数库，可以方便地和你的项目进行集成，在Debug版本中监控Activity、Fragment等的内存泄露</p>
+<li>Flutter是一个比较独立的环境，要想访问本地的资源，Flutter提供了Channel机制，类似Cilent-Server模式或者RPC</li>
+<li>通过Channel的名称打通Channel，隧道</li>
+<li>Flutter和本地是对称的，请求可以从任何一发发起，这篇文章主要是记录从Flutter给本地发送请求</li>
+</ul>
+<hr>
+<ul>
+<li>首先我们创建Flutte工程,ide随你自己喜欢，修改UI代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/material.dart&apos;;</div><div class="line">import &apos;package:flutter/services.dart&apos;;</div><div class="line">import &apos;dart:async&apos;;</div><div class="line"></div><div class="line">void main() =&gt; runApp(new MyApp());</div><div class="line"></div><div class="line">class MyApp extends StatelessWidget &#123;</div><div class="line">  // This widget is the root of your application.</div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    return new MaterialApp(</div><div class="line">      title: &apos;Flutter Demo&apos;,</div><div class="line">      theme: new ThemeData(</div><div class="line">        primarySwatch: Colors.blue,</div><div class="line">      ),</div><div class="line">      home: new MyHomePage(title: &apos;Flutter Demo Home Page&apos;),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyHomePage extends StatefulWidget &#123;</div><div class="line">  final String title;</div><div class="line">  @override</div><div class="line">  _MyHomePageState createState() =&gt; new _MyHomePageState();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class _MyHomePageState extends State&lt;MyHomePage&gt; &#123;</div><div class="line">  int _counter = 0;</div><div class="line">  static const platformMethodChannel = const MethodChannel(&quot;com.xyjy.flutterchannel/test&quot;);</div><div class="line">  num nativeMessage = 0;</div><div class="line"></div><div class="line">  void _incrementCounter() &#123;</div><div class="line">    setState(() &#123;</div><div class="line">      _counter++;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Future&lt;Null&gt; getData() async&#123;</div><div class="line">    num _message;</div><div class="line">      try&#123;</div><div class="line">        final num result = await platformMethodChannel.invokeMethod(&quot;getTime&quot;);</div><div class="line">        _message = result;</div><div class="line">      &#125;</div><div class="line">      on PlatformException catch(e)&#123;</div><div class="line">        print(e.message);</div><div class="line">      &#125;</div><div class="line">      setState(() &#123;</div><div class="line">        nativeMessage = _message;</div><div class="line">      &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @override</div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    return new Scaffold(</div><div class="line">      appBar: new AppBar(</div><div class="line">        // Here we take the value from the MyHomePage object that was created by</div><div class="line">        // the App.build method, and use it to set our appbar title.</div><div class="line">        title: new Text(widget.title),</div><div class="line">      ),</div><div class="line">      body: new Center(</div><div class="line">          mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">          children: &lt;Widget&gt;[</div><div class="line">            new Text(</div><div class="line">              &quot;$nativeMessage&quot;,</div><div class="line">            ),</div><div class="line">            new Text(</div><div class="line">              &apos;$nativeMessage&apos;,</div><div class="line">              style: Theme.of(context).textTheme.display1,</div><div class="line">            ),</div><div class="line">          ],</div><div class="line">        ),</div><div class="line">      ),</div><div class="line">      floatingActionButton: new FloatingActionButton(</div><div class="line">        onPressed: ()=&gt;getData(),</div><div class="line">        tooltip: &apos;Increment&apos;,</div><div class="line">        child: new Icon(Icons.add),</div><div class="line">      ), // This trailing comma makes auto-formatting nicer for build methods.</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>LeakCanary集成到项目中之后，在检测到内存泄露时，会发送消息到系统通知栏。点击后打开名称DisplayLeakActivity的页面，并显示泄露的跟踪信息，Logcat上面也会有对应的日志输出</p>
-</li>
+</ul>
+<ul>
+<li>很简单我只是将_counter显示的替换成了自己定义的nativeMessage，接着往下</li>
 </ul>
 <ol>
-<li>内存泄漏简介</li>
+<li><p>首先我们要引入service包和async包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &apos;package:flutter/services.dart&apos;;</div><div class="line">import &apos;dart:async&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>声明一个static const变量platformMethodChannel ，赋值MethodChannel类型的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class _MyHomePageState extends State&lt;MyHomePage&gt; &#123;</div><div class="line"> int _counter = 0;</div><div class="line"> static const platformMethodChannel = const MethodChannel(&quot;com.xyjy.flutterchannel/test&quot;);</div><div class="line"> num nativeMessage = 0;</div><div class="line"></div><div class="line"> void _incrementCounter() &#123;</div><div class="line">   setState(() &#123;</div><div class="line">     _counter++;</div><div class="line">   &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在上面我们要注意，给MethodChannel一个名字com.xyjy.flutterchannel/test,这个名字和本地（这里代表android部分）那边的要一样<br>我们创建了MethodChannel，我们准备一个用来发送请求的函数。我们创建一个叫getData的异步函数<br>await platformMethodChannel.invokeMethod(‘getTime’) 是调用本地的getTime方法，并且这个方法是异步的，await表示阻塞执行。<br>nativeMessage = _message; 表示通知Flutter状态改变，刷新界面。</p>
+</li>
 </ol>
-<ul>
-<li><p>为什么会产生内存泄漏？<br>当一个对象不需要使用本该回收时，有另外一个正在使用的对象持有它的引用，从而导致它不能回收停留在堆内存中，这就产生了内存泄漏</p>
-</li>
-<li><p>内存泄露对程序产生的影响？<br>内存泄漏是造成应用程序OOM的主要原因之一。Android系统为每个应用程序分配有限的内存，当应用中内存泄漏较多时，就难免会导致应用所需要的内存超出系统分配限额，从而导致OOM应用Crash</p>
-</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Future&lt;Null&gt; getData() async&#123;</div><div class="line">   // num是数字类型</div><div class="line">   num _message;</div><div class="line">     try&#123;</div><div class="line">       final num result = await platformMethodChannel.invokeMethod(&quot;getTime&quot;);</div><div class="line">       _message = result;</div><div class="line">     &#125;</div><div class="line">     on PlatformException catch(e)&#123;</div><div class="line">       print(e.message);</div><div class="line">     &#125;</div><div class="line">     setState(() &#123;</div><div class="line">       nativeMessage = _message;</div><div class="line">     &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <ol>
-<li>LeakCanary接入</li>
+<li><p>修改build里面的显示，将_counter 替换为nativeMessage ，并将floatingActionButton的onTap事件替换为我们定义好的getData方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">@override</div><div class="line">Widget build(BuildContext context) &#123;</div><div class="line">  return new Scaffold(</div><div class="line">    appBar: new AppBar(</div><div class="line">      // Here we take the value from the MyHomePage object that was created by</div><div class="line">      // the App.build method, and use it to set our appbar title.</div><div class="line">      title: new Text(widget.title),</div><div class="line">    ),</div><div class="line">    body: new Center(</div><div class="line">        mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">        children: &lt;Widget&gt;[</div><div class="line">          new Text(</div><div class="line">            &quot;$nativeMessage&quot;,</div><div class="line">          ),</div><div class="line">          new Text(</div><div class="line">            &apos;$nativeMessage&apos;,</div><div class="line">            style: Theme.of(context).textTheme.display1,</div><div class="line">          ),</div><div class="line">        ],</div><div class="line">      ),</div><div class="line">    ),</div><div class="line">    floatingActionButton: new FloatingActionButton(</div><div class="line">      onPressed: ()=&gt;getData(),</div><div class="line">      tooltip: &apos;Increment&apos;,</div><div class="line">      child: new Icon(Icons.add),</div><div class="line">    ), // This trailing comma makes auto-formatting nicer for build methods.</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>接下来本地方法如何编写，打开MainActivity</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"> public class MainActivity extends FlutterActivity &#123;</div><div class="line">  private static final  String CHANNAL = &quot;com.xyjy.flutterchannel/test&quot;;</div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    GeneratedPluginRegistrant.registerWith(this);</div><div class="line">    new MethodChannel(getFlutterView() , CHANNAL).setMethodCallHandler(new MethodChannel.MethodCallHandler()</div><div class="line">    &#123;</div><div class="line">      @Override</div><div class="line">      public void onMethodCall(MethodCall methodCall, MethodChannel.Result result)</div><div class="line">      &#123;</div><div class="line">          if (methodCall.method.equals(&quot;getTime&quot;))</div><div class="line">          &#123;</div><div class="line">              long time = getTime();</div><div class="line">              result.success(time);</div><div class="line">          &#125;</div><div class="line">          else</div><div class="line">          &#123;</div><div class="line">            result.notImplemented();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private long getTime()</div><div class="line">  &#123;</div><div class="line">    return System.currentTimeMillis();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ol>
 <ul>
-<li><p>我们以LeakCanaryTest项目进行演示如何在项目中接入LeakCanary，项目目录如下：<br><img src="https://upload-images.jianshu.io/upload_images/5631872-20c158ad739db334.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522222494(1).png"><br>整个结构非常的简单如上图所示</p>
-</li>
-<li><p>在主项目main模块的build.gradle文件中添加LeakCanary相关依赖 -/main/build.gradle文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> dependencies &#123;</div><div class="line">    implementation fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">    implementation &apos;com.android.support:appcompat-v7:26.1.0&apos;</div><div class="line"></div><div class="line">    // 添加leakcanary相关的依赖</div><div class="line">    // 在release版本中，使用的是LeakCanary的no-op版本，也就是没有实际代码和操作的Wrapper版本</div><div class="line">    // 只包含LeakCanary和RefWatcher类的空实现，这样不会对生成的APK包体积和应用性能造成影响</div><div class="line">    debugImplementation &apos;com.squareup.leakcanary:leakcanary-android:1.5.4&apos;</div><div class="line">    releaseImplementation &apos;com.squareup.leakcanary:leakcanary-android-no-op:1.5.4&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>初始化LeakCanary在主项目main模块的QApplication的onCreate()方法中初始化LeakCanary<br>leakcanary.com.leakcanarytest.FFApplication文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class FFApplication extends Application</div><div class="line">&#123;</div><div class="line">    @Override</div><div class="line">    public void onCreate()</div><div class="line">    &#123;</div><div class="line">        super.onCreate();</div><div class="line">        if (LeakCanary.isInAnalyzerProcess(this))</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        LeakCanary.install(this);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>CHANNAL 里面的字符串一定是与Flutter定义一致，在MethodChannel的中调用.setMethodCallHandler() 方法，需要一个MethodCallHandler 对象，是一个匿名内部类，有一个方法onMethodCall,在Flutter发送请求时，onMethodCall方法会执行， result.success(time);返回信息,这样就可以进行本地调用，点击悬浮按钮得到时间(此时的时间是通过本地返回的时间)<br><img src="https://upload-images.jianshu.io/upload_images/5631872-cb4e398f2846a43e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ图片20180709174145.png"></li>
 </ul>
-<p>这样我们就完成了一个项目的LeankCanary的简单接入</p>
-<ol>
-<li>LeakCanary检测<br>下面我们以常见内存—单例造成的内存泄露为例进行实践</li>
-</ol>
-<ul>
-<li>单例内存泄露模拟<br>LeakcanaryTest\app\src\main\java\leakcanary\com\leakcanarytest\TestManager.java<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TestManager</div><div class="line">&#123;</div><div class="line">    //单例静态特性使得单例的生命周期和应用的生命周期一样长</div><div class="line">    private static TestManager instance;</div><div class="line">    private Context context;</div><div class="line"></div><div class="line">    /**：</div><div class="line">     * 传入的是Application的Context，则生命周期和单例生命周期一样长；</div><div class="line">     * 传入的是Activity的Context，由于该Context和Activity的生命周期一样长，当Activity退出的时候它的内存不会被回收，因为单例对象持有它的引用；</div><div class="line">     */</div><div class="line">    private TestManager(Context context) &#123;</div><div class="line">        this.context = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static TestManager getInstance(Context context) &#123;</div><div class="line">        if (instance == null) &#123;</div><div class="line">            instance = new TestManager(context);</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>5.检测消息通知</p>
-<ul>
-<li><p>运行App到LeakCanaryActivit页面并退出，在检测到内存泄露的时候，会发送消息到系统通知栏如下图所示<br><img src="https://upload-images.jianshu.io/upload_images/5631872-ad0d4c3d93e7accf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522223392(1).png"><img src="https://upload-images.jianshu.io/upload_images/5631872-ce0e67c7a6db2fd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1522223450(1).png"></p>
-</li>
-<li><p>对于开发人员这时可以很清晰的看到内存泄露了并及时修复代码！</p>
-</li>
-</ul>
-<ol>
-<li>LeakCanary原理</li>
-</ol>
-<ul>
-<li>源码里面的watch()函数会为被监控的对象创建一个KeyedWeakReference弱引用对象，是WeakReference对的子类，增加了键值对信息，后面会根据指定的键key找到弱引用对象</li>
-<li>在后台线程中，检查KeyedWeakReference弱引用是否已经被清除。如果没有，则触发一次GC，GC之后，如果弱引用对象依然存在，说明发生了内存泄露</li>
-</ul>
-<ol>
-<li>对于项目的好处</li>
-</ol>
-<ul>
-<li>对于开发人员来说，可以优化app代码，减少内存泄漏和bug,有利于后期维护</li>
-<li>对于测试人员，完善后的APP，可以大大减轻测试的难度和强度</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></p>
 
       
 
@@ -277,6 +252,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -327,7 +313,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/28/LeakCanary内存泄露检测/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/07/09/flutter学习笔记（二）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -341,18 +327,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/03/项目构建/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          项目构建
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/01/View的事件分发机制/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">View的事件分发机制</div>
+    <a href="/2018/07/08/flutter学习之功能小应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flutter功能小应用</div>
       <i class="icon-circle-right"></i>
     </a>
   
