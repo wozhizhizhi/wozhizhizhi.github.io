@@ -155,6 +155,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-flutter学习笔记四(在android项目中集成flutter)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/26/flutter学习笔记四(在android项目中集成flutter)/">flutter学习笔记四(在android项目中集成flutter)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/26/flutter学习笔记四(在android项目中集成flutter)/" class="archive-article-date">
+  	<time datetime="2018-07-26T14:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><ul>
+<li>最近在使用flutter仿写公司的客户端，在一段的时间的使用后发现flutter在一些常见的控件中，很多无法满足，往往在轮子上耗费了大量的时间，目前就项目来看，相同的时间，如果改用Native去写，我觉得两者进度没有多大的差异</li>
+<li>在现有项目中集成Flutter，可以在flutter还没有成熟的时期，去使用,追求共通点，同时对于已有客户端进行混编<br><strong>现有项目中集成Flutter</strong></li>
+</ul>
+<ol>
+<li>创建Flutter module模板（我们在一个Android项目目录同级目录下创建模板工程）<br>flutter create -t module my_flutter</li>
+<li>添加Flutter module到Android项目中</li>
+</ol>
+<ul>
+<li><p>修改Android项目根目录的settings.gradle，将Flutter module作为一个子工程添加到项目中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  // MyApp/settings.gradle</div><div class="line">include &apos;:app&apos;                                     // assumed existing content</div><div class="line">setBinding(new Binding([gradle: this]))                                 // new</div><div class="line">evaluate(new File(                                                      // new</div><div class="line">  settingsDir.parentFile,                                               // new</div><div class="line">  &apos;my_flutter/.android/include_flutter.groovy&apos;                          // new</div><div class="line">))</div></pre></td></tr></table></figure>
+</li>
+<li><p>Sync一下，可以发现添加了两个module到项目中了。其中一个是flutter的module，其中包含了一些简单的封装，供Java代码调用。另一个是package_info的module，是一个Flutter插件就是获取app名称、包名、版本等信息</p>
+</li>
+</ul>
+<ol>
+<li>在app的build.gradle中添加依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> // MyApp/app/build.gradle</div><div class="line">:</div><div class="line">dependencies &#123;</div><div class="line">  implementation project(&apos;:flutter&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>Sync一下，到此，这个Flutter module就被添加到了Android项目中了<br><strong>开始使用</strong></li>
+</ul>
+<ol>
+<li>在我的MainActivity.java里面写代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// MainActivity.java</div><div class="line">fab.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">  @Override</div><div class="line">  public void onClick(View view) &#123;</div><div class="line">    View flutterView = Flutter.createView(</div><div class="line">      MainActivity.this,</div><div class="line">      getLifecycle(),</div><div class="line">      &quot;route1&quot;</div><div class="line">    );</div><div class="line">    FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(600, 800);</div><div class="line">    layout.leftMargin = 100;</div><div class="line">    layout.topMargin = 200;</div><div class="line">    addContentView(flutterView, layout);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>上面我们使用字符串“route1”告诉Dart代码在Flutter视图中显示哪个小部件。 Flutter模块项目模板的lib / main.dart文件包含提供的路由字符串,需要哪些路径字符串以及如何解释它们取决于我们自己<br>-效果如下所示，但是我还是有些失望,黑一下的效果的确让人难以接受，不过这项技术确实挺有吸引力，一起期待flutter的正式版吧<br><img src="https://upload-images.jianshu.io/upload_images/5631872-febd12a2759a315f.gif?imageMogr2/auto-orient/strip" alt="GIF.gif"></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/26/flutter学习笔记四(在android项目中集成flutter)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flutter学习笔记（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -974,76 +1076,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/01/View的事件分发机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一款简单易用的天气app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/一款简单易用的天气app/">一款简单易用的天气app</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/一款简单易用的天气app/" class="archive-article-date">
-  	<time datetime="2018-02-05T12:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一款简单易用的天气app"><a href="#一款简单易用的天气app" class="headerlink" title="一款简单易用的天气app"></a>一款简单易用的天气app</h1><ul>
-<li>网络层使用OKhttp</li>
-<li>整体结构使用Fragmen + Activity,代码简单易懂，有需要的请自行下载<br><img src="http://upload-images.jianshu.io/upload_images/5631872-52450afe61322fa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-1aca3da1f18907b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image02.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-9f09e69f0e756bd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-5dc94e5ce97fb8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"></li>
-</ul>
-<h6 id="欢迎大家访问我的博客"><a href="#欢迎大家访问我的博客" class="headerlink" title="欢迎大家访问我的博客"></a>欢迎大家访问我的博客</h6><p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
-<ul>
-<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/newsweather" target="_blank" rel="external">完整DEMO</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/一款简单易用的天气app/">展开全文 >></a>
         </p>
       
 
