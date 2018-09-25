@@ -155,6 +155,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-flutter学习笔记五(解决混合开发黑屏问题)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/25/flutter学习笔记五(解决混合开发黑屏问题)/">flutter学习笔记五(解决混合开发黑屏问题)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/25/flutter学习笔记五(解决混合开发黑屏问题)/" class="archive-article-date">
+  	<time datetime="2018-09-25T14:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="解决混合开发黑屏问题"><a href="#解决混合开发黑屏问题" class="headerlink" title="解决混合开发黑屏问题"></a>解决混合开发黑屏问题</h2><ul>
+<li>将Android项目中嵌入Flutter工程的时候，在跳转的时候会黑屏，目前我也没有找到很好的方法，网上的方法也试了一下，目前也还没有比较好的效果，有道友留言说打release 也许不会黑屏这个我没试验，有兴趣的道友可以试试，下面来说说这种简单粗暴的方法这是在debug模式下操作的：</li>
+<li><p>直接配置当前activity的theme为透明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;FlutterTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/task_bg&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后在当前activity中设置该主题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;activity           </div><div class="line">      android:name=&quot;com.readnewhome.FlutterIntegralCenterActivity&quot;</div><div class="line">      android:screenOrientation=&quot;portrait&quot;</div><div class="line">      android:theme=&quot;@style/FlutterTheme&quot; &gt;</div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>其次是设置flutter页面android状态栏全透明</p>
+</li>
+<li><p>这是一种比较简单的方法直接看代码吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends FlutterActivity &#123;</div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP)</div><div class="line">    &#123;</div><div class="line">         // api大于21设置状态栏透明</div><div class="line">        getWindow().setStatusBarColor(0);</div><div class="line">    &#125;</div><div class="line">    GeneratedPluginRegistrant.registerWith(this);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>只要这样设置了就可以达到如下效果所示<br><img src="https://user-gold-cdn.xitu.io/2018/9/25/1660ff162170295b?w=433&amp;h=134&amp;f=png&amp;s=19782" alt="QQ图片20180918142736.png"></p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flutter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/25/flutter学习笔记五(解决混合开发黑屏问题)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flutter学习笔记四(在android项目中集成flutter)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -998,76 +1087,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/01/View的事件分发机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一款简单易用的天气app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/一款简单易用的天气app/">一款简单易用的天气app</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/一款简单易用的天气app/" class="archive-article-date">
-  	<time datetime="2018-02-05T12:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一款简单易用的天气app"><a href="#一款简单易用的天气app" class="headerlink" title="一款简单易用的天气app"></a>一款简单易用的天气app</h1><ul>
-<li>网络层使用OKhttp</li>
-<li>整体结构使用Fragmen + Activity,代码简单易懂，有需要的请自行下载<br><img src="http://upload-images.jianshu.io/upload_images/5631872-52450afe61322fa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-1aca3da1f18907b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image02.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-9f09e69f0e756bd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-5dc94e5ce97fb8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"></li>
-</ul>
-<h6 id="欢迎大家访问我的博客"><a href="#欢迎大家访问我的博客" class="headerlink" title="欢迎大家访问我的博客"></a>欢迎大家访问我的博客</h6><p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
-<ul>
-<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/newsweather" target="_blank" rel="external">完整DEMO</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/一款简单易用的天气app/">展开全文 >></a>
         </p>
       
 
