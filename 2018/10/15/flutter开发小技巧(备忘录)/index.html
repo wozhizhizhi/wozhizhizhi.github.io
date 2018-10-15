@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>子思笔的博客</title>
+  <title>flutter开发小技巧(备忘录) | 子思笔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="子思笔的博客">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="获取设备宽高12double width = MediaQuery.of(context).size.width;double height = MediaQuery.of(context).size.height; Android设置状态栏透明 原生修改 123456789101112public class MainActivity extends FlutterActivity &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flutter开发小技巧(备忘录)">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/flutter开发小技巧(备忘录)/index.html">
 <meta property="og:site_name" content="子思笔的博客">
+<meta property="og:description" content="获取设备宽高12double width = MediaQuery.of(context).size.width;double height = MediaQuery.of(context).size.height; Android设置状态栏透明 原生修改 123456789101112public class MainActivity extends FlutterActivity &amp;#123;">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5631872-f91c7d80c6482b8f.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-15T15:05:18.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="子思笔的博客">
+<meta name="twitter:title" content="flutter开发小技巧(备忘录)">
+<meta name="twitter:description" content="获取设备宽高12double width = MediaQuery.of(context).size.width;double height = MediaQuery.of(context).size.height; Android设置状态栏透明 原生修改 123456789101112public class MainActivity extends FlutterActivity &amp;#123;">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5631872-f91c7d80c6482b8f.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternative" href="/atom.xml" title="子思笔的博客" type="application/atom+xml">
   
@@ -153,48 +159,70 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-View的事件分发机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-flutter开发小技巧(备忘录)" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/01/View的事件分发机制/">View的事件分发机制</a>
+    <h1 class="article-title" itemprop="name">
+      flutter开发小技巧(备忘录)
     </h1>
   
 
         
-        <a href="/2018/03/01/View的事件分发机制/" class="archive-article-date">
-  	<time datetime="2018-03-01T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
+        <a href="/2018/10/15/flutter开发小技巧(备忘录)/" class="archive-article-date">
+  	<time datetime="2018-10-15T11:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="View的事件分发机制"><a href="#View的事件分发机制" class="headerlink" title="View的事件分发机制"></a>View的事件分发机制</h2><ul>
-<li>网上讲view的事件分发机制的很多，但是大多都讲解的很混乱，我想整一篇大家都能看的懂得，下面我们以通俗易懂的方式来说说事件的分发机制</li>
-<li>首先我写了一段伪代码来理一理事件分发的3个重要方法的关系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public boolean dispatchTouchEvent(MotionEvent ev)</div><div class="line">   &#123;</div><div class="line">       boolean result = false;</div><div class="line">       if (onInterceptTouchEvent(ev))</div><div class="line">       &#123;</div><div class="line">           result = super.onTouchEvent(ev);</div><div class="line">       &#125;</div><div class="line">       else</div><div class="line">       &#123;</div><div class="line">           result = child.dispathTouchEvent(ev);</div><div class="line">       &#125;</div><div class="line">       return result;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+        <h4 id="获取设备宽高"><a href="#获取设备宽高" class="headerlink" title="获取设备宽高"></a>获取设备宽高</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">double width = MediaQuery.of(context).size.width;</div><div class="line">double height = MediaQuery.of(context).size.height;</div></pre></td></tr></table></figure>
+<h4 id="Android设置状态栏透明"><a href="#Android设置状态栏透明" class="headerlink" title="Android设置状态栏透明"></a>Android设置状态栏透明</h4><ol>
+<li><p>原生修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends FlutterActivity &#123;</div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP)</div><div class="line">    &#123;</div><div class="line">         // api大于21设置状态栏透明</div><div class="line">        getWindow().setStatusBarColor(0);</div><div class="line">    &#125;</div><div class="line">    GeneratedPluginRegistrant.registerWith(this);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<ol>
-<li><p>我们先来说说事件由上而下的传递规则,当点击事件产生后会最先有Activity来处理,传递给PhoneWindow,传递给DecorView,最后传递给ViewGroup也就是你setContentView的布局,一般在事件传递中只考虑ViewGroup的onInterceptTouchEvent的方法，而我们一般情况下也不会去重写dispathTouchEvent()方法</p>
-</li>
-<li><p>对于根ViewGroup,点击事件会先传递给它的onInterceptTouchEvent（）方法,如果该ViewGroup的onInterceptTouchEvent（）方法返回为true,这表示它会拦截这个事件，返回为false则表示不会去拦截这个事件，则这个事件会交给它的子元素的dispathTouchEvent()来处理，这样反复下去，如果传递到底层的view,就会调用view的dispathTouchEvent()方法，最终会调用View的onTouchEvent（）方法</p>
+<li><p>flutter修改（么有测试过，自己测试下反正不难）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 输出渲染</div><div class="line">void main() &#123;</div><div class="line">  runApp(App());</div><div class="line">  if (Platform.isAndroid) &#123;</div><div class="line">    // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。</div><div class="line">    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);</div><div class="line">    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>-. 所以点击事件由上而下的传递规则是：为true,则拦截，不继续向下传递；为false则不拦截，继续向下传递</p>
-<p>-. 接下来我们来说说事件由下而上的传递,当点击事件传给底层的view时，如果其onTouchEvent（）返回为ture,则事件由底层的view消耗并处理了；如果返回为false则表示该view不做处理,传递给父view的onTouchEvent（）处理 ; 如果父view的onTouchEvent（）任然返回false,则继续传递给该父view的父view处理，如此反复下去。</p>
-<p>最后举个武侠例子吧，武林盟主的小弟发现敌人武功高强，打不过（onTouchEvent（）返回为false）,于是就去报告二当家，二当家的发现敌人太厉害，自己也打不过了（onTouchEvent（）返回为false）就去告诉武林盟主，武林盟主用无极剑法很轻松的打败了来犯的敌人（onTouchEvent（）返回为true）。</p>
-<p>-. 所以点击事件由下而上的传递规则是：为true,则是处理了，不继续向上传递；为false则不处理，继续向上传递</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></p>
-<p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
+<h4 id="区别final与const"><a href="#区别final与const" class="headerlink" title="区别final与const"></a>区别final与const</h4><p>在Dart中，当你不需要去改变一个变量的时候，应该使用final或者const，而不是使用var去声明一个变量。一个final变量只允许被赋值一次，必须在定义时或者构造函数参数表中将其初始化。<br>const所修饰的是编译时常量，我们在编译时就已经知道了它的值，它的值是不可改变的。<br>const比final更加严格，看以下例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">final List&lt;String&gt; list = [];</div><div class="line">list.add(&apos;1&apos;); // 正确</div><div class="line"></div><div class="line">const List&lt;String&gt; list = [];</div><div class="line">list.add(&apos;1&apos;); // 错误，运行时报错：Cannot add to an unmodifiable list</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">final timestamp = new DateTime.now().millisecondsSinceEpoch; // 正确</div><div class="line"></div><div class="line">const timestamp = new DateTime.now().millisecondsSinceEpoch; // 错误，编译前报错：Const variables must be initialized with a constant value</div></pre></td></tr></table></figure>
+<h4 id="FocusScope转移焦点，隐藏输入法"><a href="#FocusScope转移焦点，隐藏输入法" class="headerlink" title="FocusScope转移焦点，隐藏输入法"></a>FocusScope转移焦点，隐藏输入法</h4><p><img src="https://upload-images.jianshu.io/upload_images/5631872-f91c7d80c6482b8f.gif?imageMogr2/auto-orient/strip" alt="166723349530a968.gif"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Container(</div><div class="line">        height: 500.0,</div><div class="line">        child: new GestureDetector(</div><div class="line">          onTap: () &#123;</div><div class="line">            // 通过GestureDetector捕获点击事件，再通过FocusScope将焦点转移至空焦点      new FocusNode()</div><div class="line">            FocusScope.of(context).requestFocus(FocusNode());</div><div class="line">          &#125;,</div><div class="line">          child: Container(</div><div class="line">              margin: EdgeInsets.all(30.0),</div><div class="line">              child: ListView(children: &lt;Widget&gt;[</div><div class="line">                TextField(</div><div class="line">                  decoration: InputDecoration(labelText: &apos;Username&apos;),</div><div class="line">                ),</div><div class="line">                TextField(</div><div class="line">                  decoration: InputDecoration(labelText: &apos;Password&apos;),</div><div class="line">                )</div><div class="line">              ])),</div><div class="line">        ),</div><div class="line">      ),</div></pre></td></tr></table></figure></p>
+<ul>
+<li>这里传递给FocusScope的context不能在MaterialApp下面，即你需要将这部分代码放到独立的一个Widget里面</li>
+</ul>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wx.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -203,16 +231,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/01/View的事件分发机制/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/15/flutter开发小技巧(备忘录)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/25/flutter学习笔记五(解决混合开发黑屏问题)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flutter学习笔记五(解决混合开发黑屏问题)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -232,686 +319,14 @@
 
 
 
-
-  
-    <article id="post-一款简单易用的天气app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/一款简单易用的天气app/">一款简单易用的天气app</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/一款简单易用的天气app/" class="archive-article-date">
-  	<time datetime="2018-02-05T12:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一款简单易用的天气app"><a href="#一款简单易用的天气app" class="headerlink" title="一款简单易用的天气app"></a>一款简单易用的天气app</h1><ul>
-<li>网络层使用OKhttp</li>
-<li>整体结构使用Fragmen + Activity,代码简单易懂，有需要的请自行下载<br><img src="http://upload-images.jianshu.io/upload_images/5631872-52450afe61322fa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-1aca3da1f18907b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image02.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-9f09e69f0e756bd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-5dc94e5ce97fb8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image03.jpg"></li>
-</ul>
-<h6 id="欢迎大家访问我的博客"><a href="#欢迎大家访问我的博客" class="headerlink" title="欢迎大家访问我的博客"></a>欢迎大家访问我的博客</h6><p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
-<ul>
-<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/newsweather" target="_blank" rel="external">完整DEMO</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/一款简单易用的天气app/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一款历史搜索记录功能的自定义搜索框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">一款历史搜索记录功能的自定义搜索框</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/" class="archive-article-date">
-  	<time datetime="2018-02-02T06:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="SearchLayout-weight"><a href="#SearchLayout-weight" class="headerlink" title="SearchLayout_weight"></a>SearchLayout_weight</h4><p><img src="http://upload-images.jianshu.io/upload_images/5631872-909ddff917ed6493.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image01.jpg"></p>
-<ul>
-<li>使用简单高度自定义<h2 id="步骤1：导入控件库"><a href="#步骤1：导入控件库" class="headerlink" title="步骤1：导入控件库"></a>步骤1：导入控件库</h2></li>
-<li><p>root build.gradle写入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">allprojects &#123;</div><div class="line">		repositories &#123;</div><div class="line">			...</div><div class="line">			maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Gradle引入依赖 build.Gradle</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	        compile &apos;com.github.wozhizhizhi:SearchLayout_weight:v1.0&apos;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="步骤2：设置搜索框"><a href="#步骤2：设置搜索框" class="headerlink" title="步骤2：设置搜索框"></a>步骤2：设置搜索框</h2><ul>
-<li>在XML文件中进行设置 activity_search.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;com.aji.searchlayoutview.SearchView</div><div class="line">        android:id=&quot;@+id/search_view&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        app:textSizeSearch=&quot;5dp&quot;</div><div class="line">        app:textColorSearch=&quot;#9b9b9b&quot;</div><div class="line">        app:textHintSearch=&quot;请输入查询的关键字&quot;</div><div class="line">        app:searchBlockHeight=&quot;150&quot;</div><div class="line">        app:searchBlockColor=&quot;#ffffff&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="步骤3：代码使用"><a href="#步骤3：代码使用" class="headerlink" title="步骤3：代码使用"></a>步骤3：代码使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity</div><div class="line">&#123;</div><div class="line"></div><div class="line">    // 1. 初始化搜索框变量</div><div class="line">    private SearchView searchView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        // 2. 绑定视图</div><div class="line">        setContentView(R.layout.activity_search);</div><div class="line"></div><div class="line">        // 3. 绑定组件</div><div class="line">        searchView = (SearchView) findViewById(R.id.search_view);</div><div class="line"></div><div class="line">        // 4. 设置点击搜索按键后的操作（通过回调接口）</div><div class="line">        // 参数 = 搜索框输入的内容</div><div class="line">        searchView.setOnClickSearch(new ICallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void SearchAciton(String string)</div><div class="line">            &#123;</div><div class="line">                System.out.println(&quot;我收到了&quot; + string);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 5. 设置点击返回按键后的操作（通过回调接口）</div><div class="line">        searchView.setOnClickBack(new BCallBack()</div><div class="line">        &#123;</div><div class="line">            @Override</div><div class="line">            public void BackAciton() &#123;</div><div class="line">                finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>因为代码比较完善，所以没有在另外多做代码讲解,有需要的小伙伴可以自行下载研究<br><a href="https://github.com/wozhizhizhi/SearchLayout_weight" target="_blank" rel="external">完整DEMO</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/一款历史搜索记录功能的自定义搜索框/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式之单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/12/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/12/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2018-01-12T12:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2><ul>
-<li>单例模式（Singleton），简单来说，就是被单例的对象只能有一个实例存在。</li>
-<li>单例模式的实现方式<br>一个类能返回对象的一个引用（同一个）和一个获得该唯一实例的方法（静态方法）通过单例模式，我们可以保证系统中只有一个实例，从而达到节约或者控制系统资源的目的</li>
-<li>举个例子<br>1.在现实生活中跟你结婚的女人肯定只有一个,不然你就等着死翘翘了，重婚罪可不小–！</li>
-<li>实现单例的几种模式</li>
-</ul>
-<ol>
-<li>饿汉模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	// singleton</div><div class="line">	public MyWife() &#123;&#125;</div><div class="line">	private static final MyWife myWife = new MyWife();</div><div class="line">	public static MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>饿汉就是不管有没有调用过获得实例的方法，每次都会新建一个实例。</li>
-</ul>
-<ol>
-<li>懒汉模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static MyWife myWife;</div><div class="line">	public MyWife ()&#123;&#125;;</div><div class="line">	private static MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		if (myWife== null)</div><div class="line">		&#123;</div><div class="line">			myWife= new MyWife ();</div><div class="line">		&#125;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>懒汉模式 缺点，如果是多个线程调用就会创建多个单例</li>
-</ul>
-<ol>
-<li><p>懒汉模式线程安全，简单点的直接加同步关键字synchronized</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static MyWife myWife;</div><div class="line">	public MyWife ()&#123;&#125;;</div><div class="line">	private static synchronized MyWife getWife()</div><div class="line">	&#123;</div><div class="line">		if (wife == null)</div><div class="line">		&#123;</div><div class="line">			myWife= new MyWife ();</div><div class="line">		&#125;</div><div class="line">		return myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>双重检验锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class MyWife </div><div class="line">&#123;</div><div class="line"> private volatile static MyWife myWife;</div><div class="line"></div><div class="line"> private MyWife()&#123; &#125;</div><div class="line"></div><div class="line"> public static MyWife getWife()</div><div class="line"> &#123;</div><div class="line">     if (myWife == null) </div><div class="line">     &#123;</div><div class="line">         synchronized(MyWife.class)</div><div class="line">         &#123;</div><div class="line">             if (myWife == null) </div><div class="line">             &#123;</div><div class="line">            	 myWife = new MyWife();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">     return myWife;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>对于双重检验锁并不是太推荐使用，因为volatile 关键字作用是防止编译器自行优化代码 但是volatile 关键字在某些老版本的 JDK 中无法正常工作</li>
-</ul>
-<p>5 静态内部类的单例模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MyWife</div><div class="line">&#123;</div><div class="line">	private static class WifeHodler</div><div class="line">	&#123;</div><div class="line">		private static final MyWife myWife = new MyWife();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static MyWife getMyWife()</div><div class="line">	&#123;</div><div class="line">		return WifeHodler.myWife;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>这种方式是推荐使用的，首先 WifeHolder 类是私有的，除了 getMyWife() 之外没有其它方式可以访问实例对象，而且只有在调用 getWife() 时才会去真正创建实例对象</li>
-</ul>
-<ol>
-<li>枚举的单例模式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public enum MyWife</div><div class="line">&#123;</div><div class="line">	INSTANCE;</div><div class="line">	// 自定义任意的方法</div><div class="line">	public void whateverMethod()</div><div class="line">	&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>这种方式使用较好，但是逼格比较高 , 有兴趣可以试试<br><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></li>
-</ul>
-<p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/12/设计模式之单例模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-瞎玩android之太极" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/10/瞎玩android之太极/">瞎玩android之太极</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/10/瞎玩android之太极/" class="archive-article-date">
-  	<time datetime="2018-01-10T12:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="太极"><a href="#太极" class="headerlink" title="太极"></a>太极</h2><ul>
-<li>太极拳中华之武术，强身健体，我自小也很爱武术，但是本人确是武术之菜鸟，网上在次看到太极图，- - 刚刚看到了一张太极的觉得很有意思,于是想用程序实现下</li>
-</ul>
-<ol>
-<li><p>废话不多说，很简单先上代码，哦不是是先上图片<br><img src="http://upload-images.jianshu.io/upload_images/5631872-79d9ab259618f31b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="device-2018-01-10-121939.png"></p>
-</li>
-<li><p>做之前先不忙写代码，要分析，太极图案实际上是一个圆分为黑白两块,然后边缘又是两圆,两个小点又是两圆，这样一分析代码就好写了，首先我需要准备两支画笔一黑一白</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 设置画布的中心点到中心</div><div class="line"> canvas.translate(width/2 , height/2);</div><div class="line"> // 设置画布的颜色</div><div class="line"> canvas.drawColor(Color.DKGRAY);</div><div class="line"> canvas.rotate(drgger);</div><div class="line"></div><div class="line"> int radius = Math.min(width , height)/2 - 200;</div><div class="line"> // 开始画2个半圆</div><div class="line"> RectF rectF = new RectF(-radius, -radius, radius, radius);</div><div class="line"> canvas.drawArc(rectF , -90 , 180 , true , baiPanit);</div><div class="line"> canvas.drawArc(rectF , 90 , 180 , true , heiPanit);</div></pre></td></tr></table></figure>
-</li>
-<li><p>接下来画出我们的中圆</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 绘制两个中圆</div><div class="line"> int samllRadius = radius / 2;</div><div class="line"> canvas.drawCircle(0 , -samllRadius , samllRadius , heiPanit);</div><div class="line"> canvas.drawCircle(0 , samllRadius , samllRadius , baiPanit);</div></pre></td></tr></table></figure>
-</li>
-<li><p>最后绘制出我们的小木鱼就是最小的圆心</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 绘制两个小圆点</div><div class="line"> int s_samllRadius = radius / 8;</div><div class="line"> canvas.drawCircle(0 , -samllRadius , s_samllRadius , baiPanit);</div><div class="line"> canvas.drawCircle(0 , samllRadius , s_samllRadius , heiPanit);</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>####完整代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">public class Taiji extends View</div><div class="line">&#123;</div><div class="line">    private Paint baiPanit;</div><div class="line">    private Paint heiPanit;</div><div class="line">    private float drgger = 0;</div><div class="line">    public Taiji(Context context)</div><div class="line">    &#123;</div><div class="line">        super(context);</div><div class="line">        initPic();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Taiji(Context context, @Nullable AttributeSet attrs)</div><div class="line">    &#123;</div><div class="line">        super(context, attrs);</div><div class="line">        initPic();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Taiji(Context context, @Nullable AttributeSet attrs, int defStyleAttr)</div><div class="line">    &#123;</div><div class="line">        super(context, attrs, defStyleAttr);</div><div class="line">        initPic();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Taiji(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes)</div><div class="line">    &#123;</div><div class="line">        super(context, attrs, defStyleAttr, defStyleRes);</div><div class="line">        initPic();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 初始化画笔</div><div class="line">    private void initPic()</div><div class="line">    &#123;</div><div class="line">        baiPanit = new Paint();</div><div class="line">        baiPanit.setAntiAlias(true);</div><div class="line">        baiPanit.setColor(Color.WHITE);</div><div class="line"></div><div class="line">        // 复用第一个的属性</div><div class="line">        heiPanit = new Paint(baiPanit);</div><div class="line">        heiPanit.setColor(Color.BLACK);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDraw(Canvas canvas)</div><div class="line">    &#123;</div><div class="line">        super.onDraw(canvas);</div><div class="line">        int width = canvas.getWidth();</div><div class="line">        int height = canvas.getHeight();</div><div class="line"></div><div class="line"></div><div class="line">        // 设置画布的中心点到中心</div><div class="line">        canvas.translate(width/2 , height/2);</div><div class="line">        // 设置画布的颜色</div><div class="line">        canvas.drawColor(Color.DKGRAY);</div><div class="line">        canvas.rotate(drgger);</div><div class="line"></div><div class="line">        int radius = Math.min(width , height)/2 - 200;</div><div class="line">        // 开始画2个半圆</div><div class="line">        RectF rectF = new RectF(-radius, -radius, radius, radius);</div><div class="line">        canvas.drawArc(rectF , -90 , 180 , true , baiPanit);</div><div class="line">        canvas.drawArc(rectF , 90 , 180 , true , heiPanit);</div><div class="line"></div><div class="line">        // 绘制两个中圆</div><div class="line">        int samllRadius = radius / 2;</div><div class="line">        canvas.drawCircle(0 , -samllRadius , samllRadius , heiPanit);</div><div class="line">        canvas.drawCircle(0 , samllRadius , samllRadius , baiPanit);</div><div class="line"></div><div class="line">        // 绘制两个小圆点</div><div class="line">        int s_samllRadius = radius / 8;</div><div class="line">        canvas.drawCircle(0 , -samllRadius , s_samllRadius , baiPanit);</div><div class="line">        canvas.drawCircle(0 , samllRadius , s_samllRadius , heiPanit);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public void setRotate(float drgger)</div><div class="line">    &#123;</div><div class="line">        this.drgger = drgger;</div><div class="line">        invalidate();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>怎么使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onCreate(Bundle savedInstanceState)</div><div class="line">&#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    taiji = new Taiji(this);</div><div class="line">    setContentView(taiji);</div><div class="line">    handler = new Handler()</div><div class="line">    &#123;</div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg)</div><div class="line">        &#123;</div><div class="line">            super.handleMessage(msg);</div><div class="line">            taiji.setRotate(degress += 6);</div><div class="line">            handler.sendEmptyMessageDelayed(0 , 60);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    handler.sendEmptyMessageDelayed(0 , 40);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>– 喂喂这有什么用？问我我也不知道，好玩最重要！<br><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></p>
-<p><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/10/瞎玩android之太极/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C++笔记(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/11/C++笔记(1)/">C++笔记（1）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/11/C++笔记(1)/" class="archive-article-date">
-  	<time datetime="2017-12-11T13:08:12.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="编写自己的第一个应用程序“Hello-C-”"><a href="#编写自己的第一个应用程序“Hello-C-”" class="headerlink" title="编写自己的第一个应用程序“Hello C++”"></a>编写自己的第一个应用程序“Hello C++”</h1><ul>
-<li>最近在学习C++，希望能把自己理解到的记录下，第一个是为了以后好复习，第二是为了与大家一起分享自己的学习经验,共同走向人生的巅峰，万一实现了呢！<h4 id="选用学习工具"><a href="#选用学习工具" class="headerlink" title="选用学习工具"></a>选用学习工具</h4></li>
-<li><p>在工具上面，网上有很多争论，有人说学习中，要从原始开始，不能先用IDE，要自己配置环境等，这样就能很好的掌握，于是你按照大牛的说法开始安装GCC ， vim等一系列的工具包，最好弄了大半天的时间发现自己连个hello world都没有写出来，精疲力尽之后自己放弃了。</p>
-</li>
-<li><p>当然我不是反对这种做法，只是我们初学者往往都是有一个兴趣期，当你折腾了大半天，兴趣也消耗完了，最后还是卡在工具的安装这里，那不是最大的折磨，所以我的学习工具篇，是从VS2017开始，简简单单的安装，打出”Hello C++”,带我进入C++的大门。</p>
-<h4 id="工具的安装"><a href="#工具的安装" class="headerlink" title="工具的安装"></a>工具的安装</h4></li>
-<li>VS2017地址</li>
-</ul>
-<ol>
-<li><a href="https://www.visualstudio.com/zh-hans/downloads/" target="_blank" rel="external">https://www.visualstudio.com/zh-hans/downloads/</a></li>
-<li>下载Visual Studio Community 2017 这个是免费的，其他的先不要看了收费的，下载这个版本就行，然后点开下一步下一步，遇到登录页不要管直接Skip next</li>
-<li>有人说VS很大,不过2017版做的很好，我可以自由选择安装组件，由于我们只用到C++ 所以组件只选择C/C++,按照下图<br><img src="http://upload-images.jianshu.io/upload_images/5631872-da9461b4054eb846.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"></li>
-<li>等待安装成功即可，成功打开如下图<br><img src="http://upload-images.jianshu.io/upload_images/5631872-cfef099b1b4fca40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512977790(1).png"><h4 id="建立我的第一个项目"><a href="#建立我的第一个项目" class="headerlink" title="建立我的第一个项目"></a>建立我的第一个项目</h4></li>
-<li>点击左上角的文件(F),打开新建-&gt;项目，会弹出一个界面，选择Window桌面向导，项目名称可以根据你自己的喜好更改，会到达下图所示<br><img src="http://upload-images.jianshu.io/upload_images/5631872-f6c90a77b522435a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512977828(1).png"></li>
-<li>点击确定，勾选空项目 ，然后静待项目生成<br><img src="http://upload-images.jianshu.io/upload_images/5631872-7c8697839259c6e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512978107(1).png"></li>
-<li>这时在VS的右边可以看到我们生成的项目Procject1<img src="http://upload-images.jianshu.io/upload_images/5631872-365ced611b13ec15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1512978320(1).png"><h4 id="编写我们的入门代码"><a href="#编写我们的入门代码" class="headerlink" title="编写我们的入门代码"></a>编写我们的入门代码</h4></li>
-<li>选择源文件，右键添加新项，选择C++ 文件(.cpp)，C++的文件是以.cpp结尾，在文件上写上以下代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	std::cout &lt;&lt; &quot;Hello C++&quot; &lt;&lt; std::endl;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>int main()其实就相当于java的main函数一样是一个入口函数，并且一个项目中只会有一个main函数，简单来说这个函数的格式是固定的写法，你想要执行的C++程序要写在里面</li>
-<li>cout代表的输出，要使用它要引用库文件iostream,写法如上图所示，但是要注意的是你并不能直接使用cout &lt;&lt; “Hello C++”,必须写入相应的空间名称std,这个我们在这里先不说，后面会学习到，然后点击F5,会看到程序屏幕一闪就没了，不要紧张，正常现象，因为程序执行完了啊–！，在编写的c++程序中，如果是窗口不想让其消失，在程序中添加：system(“pause”);注意放在return之前，不然会执行不到了，再次运行，哈哈庆祝一下，C++的世界我要来了！<br><img src="http://upload-images.jianshu.io/upload_images/5631872-8f0d9e01daf02059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"><br><img src="http://upload-images.jianshu.io/upload_images/5631872-ff1ce57d58ea3ab6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片.png"><br><a href="http://you3000.cn" target="_blank" rel="external">我的博客</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/11/C++笔记(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-为什么使用Tinker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/11/为什么使用Tinker/">为什么使用Tinker</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/11/为什么使用Tinker/" class="archive-article-date">
-  	<time datetime="2017-12-11T13:05:44.751Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="为什么使用Tinker"><a href="#为什么使用Tinker" class="headerlink" title="为什么使用Tinker"></a>为什么使用Tinker</h2><ul>
-<li>大家都知到线上的项目，最怕的事情是出了bug,这就意味这得重新发版本，这一直以来就是很头疼的事情，所以增量更新是一个必然的趋势，在用户没有感知的情况修复bug,也不用加班赶着上新版本，剩余的时间好处很多，老司机都懂！<br><img src="http://upload-images.jianshu.io/upload_images/5631872-0b7729aae41bee82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
-</ul>
-<h2 id="Tinker的介绍"><a href="#Tinker的介绍" class="headerlink" title="Tinker的介绍"></a>Tinker的介绍</h2><ul>
-<li>废话不说先上地址<br><a href="https://github.com/Tencent/tinker" target="_blank" rel="external">Tinker</a></li>
-<li>Tinker是微信官方的Android热补丁解决方案，它支持动态下发代码、So库以及资源，让应用能够在不需要重新安装的情况下实现更新</li>
-<li>建议大家使用gradle的接入方式，一来可以很方便的集成，二来版本更新的时候只需要修改gradle配置文件，但是还是不建议项目初期就导入这个东西，可以在项目上线后在接入，目前Tinker不支持Instant Run,需要在Setting中取消Enable Instant Runx选项，下面是接入的方法</li>
-</ul>
-<ol>
-<li><p>在项目的[build.gradle]中，添加tinker-patch-gradle-plugin的依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath (&apos;com.tencent.tinker:tinker-patch-gradle-plugin:1.7.11&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>然后在app的gradle文件[app/build.gradle]我们需要添加tinker的库依赖以apply tinker的gradle插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	//可选，用于生成application类 </div><div class="line">	provided(&apos;com.tencent.tinker:tinker-android-anno:1.7.11&apos;)</div><div class="line">    //tinker的核心库</div><div class="line">    compile(&apos;com.tencent.tinker:tinker-android-lib:1.7.11&apos;) </div><div class="line">&#125;</div><div class="line">...</div><div class="line">...</div><div class="line">//apply tinker插件</div><div class="line">apply plugin: &apos;com.tencent.tinker.patch&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置好这些之后我们可以下载官方的demo找到 build.gradle文件，从build.gradle 的第127行开始复制粘贴到自己的app/build.gradle文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">def bakPath = file(&quot;$&#123;buildDir&#125;/bakApk/&quot;)......</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>4.注意配置apk路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  ext &#123;</div><div class="line">    //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?</div><div class="line">    tinkerEnabled = true</div><div class="line">    //for normal build</div><div class="line">    //旧版本apk路径配置</div><div class="line">    tinkerOldApkPath = &quot;$&#123;bakPath&#125;/app-debug-xxxx-14-05-21.apk&quot;</div><div class="line">    //用于混淆，没有混淆可以不管</div><div class="line">    tinkerApplyMappingPath = &quot;$&#123;bakPath&#125;/app-debug-xxxx-14-05-21-mapping.txt&quot;</div><div class="line">    //旧版本apk R文件</div><div class="line">    tinkerApplyResourcePath = &quot;$&#123;bakPath&#125;/app-debug-xxxx-14-05-21-R.txt&quot;</div><div class="line"></div><div class="line">    //only use for build all flavor, if not, just ignore this field</div><div class="line">    tinkerBuildFlavorDirectory = &quot;$&#123;bakPath&#125;/app-debug-xxxx-14-05-21&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>5.新建自己的Application </p>
-<ul>
-<li>继承DefaultApplicationLike 并重写onBaseContextAttached ，框架会自动生成所需要的application </li>
-<li>打开自己的AndroidManifest.xml 在application 节点下配置android:name=”xxx.xxx.xxx.xxxApplication” </li>
-<li><p>由于我们的项目已有自己的Application，为了避免改动可以将项目中的Application 继承TinkerApplication（此时onCreate方法会报错），去掉onCreate方法，将onCreate方法中的初始化操作单独抽一个init方法出来，再合适的时机进行调用，例如MainActivity，这样我们其他引用Application的地方都不需要改动。</p>
-</li>
-<li><p>接下来就很简单了，在as右边找到Gradle projects下的Tinkerr然后build</p>
-</li>
-<li>这时我们打开 app/build/output发现多了一个tinkerPatch 文件夹，其中patch_signed_7zip.apk 就是我们的补丁文件</li>
-<li>接下在合适的时候加载补丁，就可以实现热更新！<br><strong>重要重要重要，如果要打补丁包，不要直接提交修复BUG后的代码 一定要先保存一个基准包（这里的基准包其实就是指你的线上发版的包，可以建立一个包来专门保存这些apk文件）</strong><h2 id="Tinker目前存在的问题"><a href="#Tinker目前存在的问题" class="headerlink" title="Tinker目前存在的问题"></a>Tinker目前存在的问题</h2>1.Tinker不支持修改AndroidManifest.xml，Tinker不支持新增四大组件；<br>2.由于Google Play的开发者条款限制，不建议在GP渠道动态更新代码；<br>3.在Android N上，补丁对应用启动时间有轻微的影响；<br>4.不支持部分三星android-21机型，加载补丁时会主动抛出”TinkerRuntimeException:checkDexInstall failed”；<br>5.对于资源替换，不支持修改remoteView。例如transition动画，notification icon以及桌面图标。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/11/为什么使用Tinker/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何实现账号强制下线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/25/如何实现账号强制下线/">如何实现账号强制下线</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/25/如何实现账号强制下线/" class="archive-article-date">
-  	<time datetime="2017-11-25T12:33:54.004Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="如何实现账号强制下线"><a href="#如何实现账号强制下线" class="headerlink" title="如何实现账号强制下线"></a>如何实现账号强制下线</h1><ul>
-<li>强制用户下线这个功能大家应该见过很多了，到底怎么实现呢现在我们一起来做一做</li>
-</ul>
-<ol>
-<li><p>建立activity的管理类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  public class ActivityCollector</div><div class="line">  &#123;</div><div class="line">    public static List&lt;Activity&gt; activityList = new ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    public static void addActivity(Activity activity)</div><div class="line">    &#123;</div><div class="line">        activityList.add(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void removeActivity(Activity activity)</div><div class="line">    &#123;</div><div class="line">        activityList.remove(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void finshAllActivity()</div><div class="line">    &#123;</div><div class="line">        for(Activity activity : activityList)</div><div class="line">        &#123;</div><div class="line">            if (!activity.isFinishing())</div><div class="line">            &#123;</div><div class="line">                activity.finish();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立基本的activity,BaseActivity,所有的Activity都继承它，在oncreate , onResume,onDestroy添加以下代码，会注意到这里注册了一个广播，之所以要在BaseActivity里面注册是是因为以后的每个Activity都会继承BaseActivity,这个就可以保证每个界面都可以接收这个广播</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">  public class BaseActivity extends AppCompatActivity</div><div class="line">&#123;</div><div class="line">    private ForceOffineReceiver forceOffineReceiver;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(@Nullable Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        ActivityCollector.addActivity(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume()</div><div class="line">    &#123;</div><div class="line">        super.onResume();</div><div class="line">        IntentFilter intentFilter = new IntentFilter();</div><div class="line">        intentFilter.addAction(&quot;com.zz.mybreadcast.FORCE_OFFINE&quot;);</div><div class="line">        forceOffineReceiver = new ForceOffineReceiver();</div><div class="line">        registerReceiver(forceOffineReceiver , intentFilter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy()</div><div class="line">    &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        ActivityCollector.removeActivity(this);</div><div class="line">        if (forceOffineReceiver != null)</div><div class="line">        &#123;</div><div class="line">            unregisterReceiver(forceOffineReceiver);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立一个登陆的界面，界面很简单，界面我就不贴了<br><img src="http://upload-images.jianshu.io/upload_images/5631872-0e73e0cde8df2a41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1511504182(1).png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">  public class LoginActivity extends BaseActivity</div><div class="line">&#123;</div><div class="line">    private EditText login_view;</div><div class="line">    private EditText password_view;</div><div class="line">    private Button login_button;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line">        initView();</div><div class="line">        initData();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initView()</div><div class="line">    &#123;</div><div class="line">        login_view = findViewById(R.id.login_view);</div><div class="line">        password_view = findViewById(R.id.password_view);</div><div class="line">        login_button = findViewById(R.id.login_button);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initData()</div><div class="line">    &#123;</div><div class="line">        login_button.setOnClickListener(v -&gt;</div><div class="line">        &#123;</div><div class="line">            String loginStr = login_view.getText().toString().trim();</div><div class="line">            String passwordStr = password_view.getText().toString().trim();</div><div class="line">            if(loginStr.equals(&quot;admin&quot;) &amp;&amp; passwordStr.equals(&quot;123456&quot;))</div><div class="line">            &#123;</div><div class="line">                startActivity(new Intent(this , MainActivity.class));</div><div class="line">                finish();</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                Toast.makeText(LoginActivity.this , &quot;账号或者密码错误!&quot; , Toast.LENGTH_LONG);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>建立广播，代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class ForceOffineReceiver extends BroadcastReceiver</div><div class="line">&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onReceive(Context context, Intent intent)</div><div class="line">    &#123;</div><div class="line">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</div><div class="line">        builder.setTitle(&quot;提示&quot;);</div><div class="line">        builder.setCancelable(false);</div><div class="line">        builder.setMessage(&quot;您的账号在另外一台手机已经登录！&quot;);</div><div class="line">        builder.setPositiveButton(&quot;确定&quot; , new DialogInterface.OnClickListener()&#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(DialogInterface dialog, int which)</div><div class="line">            &#123;</div><div class="line">                ActivityCollector.finshAllActivity();</div><div class="line">                context.startActivity(new Intent(context , LoginActivity.class));</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        builder.show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>最后是MainActivity，这个类里面只需模仿发送下线广播就行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends BaseActivity</div><div class="line">&#123;</div><div class="line">    private Button main_button;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        main_button = findViewById(R.id.main_button);</div><div class="line">        // lambda表达式</div><div class="line">        main_button.setOnClickListener(v -&gt; &#123;</div><div class="line">            Intent intent = new Intent(&quot;com.zz.mybreadcast.FORCE_OFFINE&quot;);</div><div class="line">            sendBroadcast(intent);</div><div class="line">       &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>别忘记在配置文件里面注册哦！<br><a href="http://you3000.cn" target="_blank" rel="external">博客</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/25/如何实现账号强制下线/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-打造listview通用的Adapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/05/打造listview通用的Adapter/">打造listview通用的Adapter</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/05/打造listview通用的Adapter/" class="archive-article-date">
-  	<time datetime="2017-11-05T09:51:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="叙述"><a href="#叙述" class="headerlink" title="叙述"></a>叙述</h2><p>1.在Android开发中写Adapter是一件枯燥重复的工作。 对于Adapter一般都继承BaseAdapter写几个方法，getView里面用ViewHolder存储，这里我做一次Adapter封装，打造一个通用的Adapter,想写下来也是为了方便日后的查看，当然这里我们不谈<br>RecyclerView</p>
-<h2 id="下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter"><a href="#下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter" class="headerlink" title="下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter - -!"></a>下面是一段常用写法，每次都写到我想吐，一看到列表就想起了BaseAdapter - -!</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">public class HomeAdapter extends BaseAdapter</div><div class="line">&#123;</div><div class="line">    private Context mContext;</div><div class="line">    private List&lt;HomeBean&gt; homeBeanList;</div><div class="line">    private LayoutInflater layoutInflater;</div><div class="line"></div><div class="line">    public HomeAdapter(Context mContext, List&lt;HomeBean&gt; homeBeanList)</div><div class="line">    &#123;</div><div class="line">        this.layoutInflater = LayoutInflater.from(mContext);</div><div class="line">        this.mContext = mContext;</div><div class="line">        this.homeBeanList = homeBeanList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount()</div><div class="line">    &#123;</div><div class="line">        if(homeBeanList == null || homeBeanList.size() &lt;= 0)</div><div class="line">        &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        return homeBeanList.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int position)</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        return homeBeanList.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position)</div><div class="line">    &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void refresh(List&lt;HomeBean&gt; datas)</div><div class="line">    &#123;</div><div class="line">        if (datas == null)</div><div class="line">        &#123;</div><div class="line">            datas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.homeBeanList = datas;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        ViewHodler viewHodler = null;</div><div class="line">        HomeBean homeBean = homeBeanList.get(position);</div><div class="line">        if (convertView == null)</div><div class="line">        &#123;</div><div class="line">            viewHodler = new ViewHodler();</div><div class="line">            convertView = layoutInflater.inflate(R.layout.home_item , parent , false);</div><div class="line">            viewHodler.home_item_icon = convertView.findViewById(R.id.home_item_icon);</div><div class="line">            viewHodler.home_item_text = convertView.findViewById(R.id.home_item_text);</div><div class="line">            viewHodler.home_item_price = convertView.findViewById(R.id.home_item_price);</div><div class="line">            convertView.setTag(viewHodler);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            viewHodler = (ViewHodler) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        ImageLoadUtils.loadImage(mContext , homeBean.getImageUrl().getUrl() , viewHodler.home_item_icon);</div><div class="line">        viewHodler.home_item_text.setText(homeBean.getTitle());</div><div class="line">      viewHodler.home_item_price.setText(homeBean.getPrice());</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class ViewHodler</div><div class="line">    &#123;</div><div class="line">        private TextView home_item_text;</div><div class="line">        private TextView home_item_price;</div><div class="line">        private ImageView home_item_icon;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>这一种写法相信大家都写的很熟了，我就不多说了下面我们看看如何写通用的adapter<br>1.新建一个class,写好通用的HodlerView，代码如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line">   public class FuHodlerView</div><div class="line">&#123;</div><div class="line">    private final SparseArray&lt;View&gt; mViews;</div><div class="line">    private final int mPositiom;</div><div class="line">    private final View mConvertView;</div><div class="line"></div><div class="line">    public FuHodlerView(ViewGroup parent , int layoutId , int position)</div><div class="line">    &#123;</div><div class="line">        this.mPositiom = position;</div><div class="line">        mViews = new SparseArray&lt;&gt;();</div><div class="line">        mConvertView = LayoutInflater.from(parent.getContext()).inflate(layoutId , parent , false);</div><div class="line">        // setTag()</div><div class="line">        mConvertView.setTag(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 拿到全部的views</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public SparseArray&lt;View&gt; getAllViews()</div><div class="line">    &#123;</div><div class="line">        return mViews;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     *  拿到一个viewHodler对象</div><div class="line">     * @param convertView</div><div class="line">     * @param parent</div><div class="line">     * @param layoutId</div><div class="line">     * @param position</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static FuHodlerView get(View convertView , ViewGroup parent , int layoutId , int position)</div><div class="line">    &#123;</div><div class="line">        if(convertView == null)</div><div class="line">        &#123;</div><div class="line">            return new FuHodlerView(parent , layoutId ,position);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            return (FuHodlerView) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public View getConvertView()</div><div class="line">    &#123;</div><div class="line">        return mConvertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 通过控件的Id获取对于的控件，如果没有则加入views</div><div class="line">     * @param viewId</div><div class="line">     * @param &lt;T&gt;</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public &lt;T extends View&gt; T getView(int viewId)</div><div class="line">    &#123;</div><div class="line">       View view = mViews.get(viewId);</div><div class="line">       if(view == null)</div><div class="line">       &#123;</div><div class="line">           view = mConvertView.findViewById(viewId);</div><div class="line">       &#125;</div><div class="line">       mViews.put(viewId , view);</div><div class="line">       return (T) view;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为TextView设置字符串</div><div class="line">     * @param viewId</div><div class="line">     * @param text</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setText(int viewId , CharSequence text)</div><div class="line">    &#123;</div><div class="line">        TextView textView = getView(viewId);</div><div class="line">        textView.setText(text);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为Imageview设置本地图片</div><div class="line">     * @param viewId</div><div class="line">     * @param drawableId</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setImageResource(int viewId , int drawableId)</div><div class="line">    &#123;</div><div class="line">        ImageView imageView = getView(viewId);</div><div class="line">        imageView.setImageResource(drawableId);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 为Imageview设置网络图片</div><div class="line">     * @param viewId</div><div class="line">     * @param url</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public FuHodlerView setImageByUrl(Context context ,int viewId , String url)</div><div class="line">    &#123;</div><div class="line">        ImageView imageView = getView(viewId);</div><div class="line">        ImageLoadUtils.loadImage(context , url , imageView);</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getPositiom()</div><div class="line">    &#123;</div><div class="line">        return mPositiom;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>-代码注释的很清楚，大家可以自己看，我主要说的是这里用到了-SparseArray缓存我们itemView内部的子View，这样可以得到一个通用的ViewHolder，每次要创建ViewHolder的时候只需要传入我们的layoutId即可。<br>2.有了ViewHolder，下面我们就可以打造通用的adapter了，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line">public abstract class FuBaseAdapter&lt;T&gt; extends BaseAdapter implements AbsListView.OnScrollListener</div><div class="line">&#123;</div><div class="line">    protected Collection&lt;T&gt; mDatas;</div><div class="line">    private final int mItemLayoutId;</div><div class="line">    private AbsListView mListView;</div><div class="line">    // 是否在滑动</div><div class="line">    private boolean isScrolling;</div><div class="line">    private Context mContext;</div><div class="line">    private LayoutInflater inflater;</div><div class="line">    private AbsListView.OnScrollListener listener;</div><div class="line"></div><div class="line">    public FuBaseAdapter(AbsListView listView , Collection&lt;T&gt; mDatas , int mItemLayoutId)</div><div class="line">    &#123;</div><div class="line">        if(mDatas == null)</div><div class="line">        &#123;</div><div class="line">            mDatas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.mDatas = mDatas;</div><div class="line">        this.mListView = listView;</div><div class="line">        this.mItemLayoutId = mItemLayoutId;</div><div class="line">        mContext = listView.getContext();</div><div class="line">        inflater = LayoutInflater.from(mContext);</div><div class="line">        mListView.setOnScrollListener(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 刷新数据</div><div class="line">    public void refresh(Collection&lt;T&gt; mDatas)</div><div class="line">    &#123;</div><div class="line">        if(mDatas == null)</div><div class="line">        &#123;</div><div class="line">            mDatas = new ArrayList&lt;&gt;(0);</div><div class="line">        &#125;</div><div class="line">        this.mDatas = mDatas;</div><div class="line">        notifyDataSetChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void addOnScrollListener(AbsListView.OnScrollListener l)</div><div class="line">    &#123;</div><div class="line">        this.listener = l;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount()</div><div class="line">    &#123;</div><div class="line">        if (mDatas == null || mDatas.size() &lt;= 0)</div><div class="line">        &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        return mDatas.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public T getItem(int position)</div><div class="line">    &#123;</div><div class="line">        if (mDatas instanceof List)</div><div class="line">        &#123;</div><div class="line">            return ((List&lt;T&gt;) mDatas).get(position);</div><div class="line">        &#125;</div><div class="line">        else if (mDatas instanceof Set)</div><div class="line">        &#123;</div><div class="line">            return new ArrayList&lt;T&gt;(mDatas).get(position);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position)</div><div class="line">    &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        final FuHodlerView fuHodlerView = getViewHodler(position , convertView ,parent);</div><div class="line">        convert(fuHodlerView , getItem(position) , isScrolling ,position);</div><div class="line">        return fuHodlerView.getConvertView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public FuHodlerView getViewHodler(int position , View convertView , ViewGroup parent)</div><div class="line">    &#123;</div><div class="line">        return FuHodlerView.get(convertView , parent , mItemLayoutId , position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void convert(FuHodlerView helper , T item , boolean isScrolling)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void convert(FuHodlerView helper , T item , boolean isScrolling , int position)</div><div class="line">    &#123;</div><div class="line">        convert(helper, getItem(position), isScrolling);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onScrollStateChanged(AbsListView view, int scrollState)</div><div class="line">    &#123;</div><div class="line">        // 当前没有滚动的时候</div><div class="line">        if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE)</div><div class="line">        &#123;</div><div class="line">            isScrolling = false;</div><div class="line">            this.notifyDataSetChanged();</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            isScrolling = true;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if(listener != null)</div><div class="line">        &#123;</div><div class="line">            listener.onScrollStateChanged(view , scrollState);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)</div><div class="line">    &#123;</div><div class="line">        if(listener != null)</div><div class="line">        &#123;</div><div class="line">            listener.onScroll(view , firstVisibleItem , visibleItemCount , totalItemCount);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>-在这里我继承了OnScrollListener，这里主要是为了做一个优化即滚动时不加载图片<br>3.最关键的时候到了，怎使用呢只需继承我们通用的Adapter，请看代码,代码是最好的老师<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class HomeFuAdapter extends FuBaseAdapter&lt;HomeBean&gt;</div><div class="line">&#123;</div><div class="line"></div><div class="line">    public HomeFuAdapter(AbsListView listView, List&lt;HomeBean&gt; mDatas)</div><div class="line">    &#123;</div><div class="line">        super(listView, mDatas, R.layout.home_item);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void convert(FuHodlerView helper, HomeBean item, boolean isScrolling)</div><div class="line">    &#123;</div><div class="line">        Context context = helper.getConvertView().getContext();</div><div class="line">        if(isScrolling)</div><div class="line">        &#123;</div><div class="line">            ImageView imageView = helper.getView(R.id.home_item_icon);</div><div class="line">            ImageLoadUtils.loadImage(context , item.getImageUrl().getUrl() ,imageView);</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            helper.setImageByUrl(context , R.id.home_item_icon , item.getImageUrl().getUrl());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        helper.setText(R.id.home_item_text , item.getTitle());</div><div class="line">        helper.setText(R.id.home_item_price , item.getPrice());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>-大功告成简简单单的几行代码搞定，然后在Activity里面new HomeFuAdapter……这么简单我就不写了小伙伴们自己可以搞定的，剩下的时间可以在QQ群和一群群友们吹吹水聊聊天了！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/05/打造listview通用的Adapter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -940,8 +355,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
